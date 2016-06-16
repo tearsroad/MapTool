@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/ll_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/bg_color" >
+
+        <ImageView
+            android:id="@+id/ImageView1"
+            android:layout_width="127dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/tt_logo" />
+    </RelativeLayout>
+
+    <!-- 
+   <RadioGroup
+        android:id="@+id/radioGroup_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_below="@id/ll_logo"
+        android:orientation="horizontal">
+
+    </RadioGroup>
+     -->
+
+     <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager_titleList"
+        android:layout_below="@id/ll_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+ 
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/PagerTabStrip"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:gravity="center" />
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

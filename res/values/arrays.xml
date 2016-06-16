@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="stockout_reason">
+        <item>无货</item>
+        <item>没人领不到东西</item>
+        <item>没有我要的东西</item>
+        <item>位置不对</item>
+    </array>
+</resources>

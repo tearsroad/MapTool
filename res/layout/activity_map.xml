@@ -1,0 +1,129 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutAll"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/ll_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/background_nav" >
+		<!-- <ImageView
+		    android:layout_width="match_parent"
+		    android:layout_height="20dp"
+		    android:background="#8F666666"/> -->
+        <!-- <ImageView
+            android:id="@+id/ImageView1"
+            android:layout_width="127dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/tt_logo" />
+             -->
+
+        <Button
+            android:id="@+id/button_articles"
+            android:layout_width="21dp"
+            android:layout_height="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="#fff"
+            android:background="@drawable/more_icon" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/button_articles"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="21dp"
+            android:text="附近免费发放点" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_bottom_90"
+        android:alpha="0.9"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="bottom"
+            android:orientation="horizontal" >
+
+            <RadioGroup
+                android:id="@+id/radioGroup_radius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:layout_marginTop="30dp" >
+
+                <RadioButton
+                    android:id="@+id/rb_500"
+                    style="@style/radio_btn_style"
+                    android:text="500米"
+                    android:layout_weight="1"
+                    android:textColor="@color/radio_selected"
+                    android:checked="true" />
+ 
+                <RadioButton
+                    android:id="@+id/rb_1000"
+                    style="@style/radio_btn_style"
+                    android:text="1000米"
+                    android:layout_weight="1"
+                    android:textColor="@color/radio_noselect" />
+ 
+                <RadioButton
+                    android:id="@+id/rb_2000"
+                    style="@style/radio_btn_style"
+                    android:text="2000米"
+                    android:layout_weight="1"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/radio_noselect"  />
+            </RadioGroup>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_changeMapType"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/normal_map1"
+        android:visibility="visible" />
+
+    <ImageView
+        android:layout_width="140px"
+        android:layout_height="140px"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ll_logo"
+        android:layout_margin="10dp"
+        android:drawableTop="@drawable/tt_normalmap"
+        android:src="@drawable/tt_normalmap"
+        android:visibility="gone" />
+	<ImageView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/logo_homepage"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentBottom="true"
+	    android:layout_marginBottom="55dp"
+	    android:layout_marginRight="25dp"/>
+</RelativeLayout>
