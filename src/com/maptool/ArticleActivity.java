@@ -16,11 +16,12 @@ import android.widget.TextView;
 import com.maptool.artical.Article;
 import com.maptool.util.ArticleUtil;
 import com.maptool.util.ArticleUtil.GetArticleListener;
+import com.maptool.view.ProgressWebView;
 
 public class ArticleActivity extends Activity {
 	private static final String TAG = "ArticleActivity";
 	TextView tvTitle;
-	WebView wvContent;
+	ProgressWebView wvContent;
 	Handler mHandler;
 	private ImageView mBackButton;
 
@@ -31,7 +32,7 @@ public class ArticleActivity extends Activity {
 
 		mHandler = new Handler();
 		tvTitle = (TextView) findViewById(R.id.textView_title);
-		wvContent = (WebView) findViewById(R.id.webView_content);
+		wvContent = (ProgressWebView) findViewById(R.id.webView_content);
 
 //		wvContent.setWebChromeClient(new WebChromeClient());
 //		wvContent.getSettings().setLayoutAlgorithm(
@@ -41,28 +42,29 @@ public class ArticleActivity extends Activity {
 		
 //		wvContent.getSettings().setUseWideViewPort(true);
 //		wvContent.getSettings().setLoadWithOverviewMode(true);
-		
+		wvContent.getSettings().setJavaScriptEnabled(true);
+		wvContent.loadUrl("http://mp.weixin.qq.com/s?__biz=MzI4MzAyNDU4NA==&mid=2650939198&idx=1&sn=fe6bcf4103a564ad327a75ada57a123f&scene=0");
 		Intent intent = getIntent();
 		String url = intent.getStringExtra("url");
 
-		ArticleUtil.getArticle(url, new GetArticleListener() {
-			@Override
-			public void onGetArticle(final Article article) {
-				mHandler.post(new Runnable() {
-					@Override
-					public void run() {
-						tvTitle.setText(article.getTitle());
-						Log.e(TAG, article.getContent());
-						String html = dealArticleContent(article.getContent());
-						wvContent.loadData(html,
-								"text/html;charset=utf-8", null);
-
-					}
-
-					
-				});
-			}
-		});
+//		ArticleUtil.getArticle(url, new GetArticleListener() {
+//			@Override
+//			public void onGetArticle(final Article article) {
+//				mHandler.post(new Runnable() {
+//					@Override
+//					public void run() {
+//						tvTitle.setText(article.getTitle());
+//						Log.e(TAG, article.getContent());
+//						String html = dealArticleContent(article.getContent());
+//						wvContent.loadData(html,
+//								"text/html;charset=utf-8", null);
+//
+//					}
+//
+//					
+//				});
+//			}
+//		});
 
 		mBackButton = (ImageView) findViewById(R.id.map);
 		mBackButton.setOnClickListener(new OnClickListener() {
