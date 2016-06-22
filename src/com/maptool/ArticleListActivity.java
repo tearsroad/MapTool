@@ -21,6 +21,7 @@ import com.maptool.artical.ArticleItem;
 import com.maptool.artical.ArticleType;
 import com.maptool.util.ArticleUtil;
 import com.maptool.util.ArticleUtil.GetArticleListListener;
+import com.maptool.view.ArticleListAdapter;
 
 public class ArticleListActivity extends Activity implements OnItemClickListener{
 
@@ -77,17 +78,18 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 
 	private void initUI() {
 		// 生成适配器，数组===》ListItem
-		SimpleAdapter mSchedule = new SimpleAdapter(this, // 没什么解释
-				mylist,// 数据来源
-				R.layout.activity_article_listview_item,// ListItem的XML实现
-
-				// 动态数组与ListItem对应的子项
-				new String[] { "title"},
-
-				// ListItem的XML文件里面的两个TextView ID
-				new int[] { R.id.title });
+//		SimpleAdapter mSchedule = new SimpleAdapter(this, // 没什么解释
+//				mylist,// 数据来源
+//				R.layout.activity_article_listview_item,// ListItem的XML实现
+//
+//				// 动态数组与ListItem对应的子项
+//				new String[] { "title"},
+//
+//				// ListItem的XML文件里面的两个TextView ID
+//				new int[] { R.id.title });
+		ArticleListAdapter adapter = new ArticleListAdapter(this, mArticleItems);
 		// 添加并且显示
-		mListView.setAdapter(mSchedule);
+		mListView.setAdapter(adapter);
 	}
 
 	@Override

@@ -26,9 +26,9 @@ public class URLUtil {
 		case ZQGL:
 			url = ARTICLE_URL_ZQGL;
 			break;
-		case XFBB:
-			url = ARTICLE_URL_XFBB;
-			break;
+//		case XFBB:
+//			url = ARTICLE_URL_XFBB;
+//			break;
 		default:
 			break;
 		}

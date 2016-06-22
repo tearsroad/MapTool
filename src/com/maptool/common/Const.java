@@ -15,5 +15,8 @@ public class Const {
 	public static String ak = "HPiT06vj4Z3j5aizs4H0RUOZ";
 	public static String sk = "G8f8xTjV2VrPB5gXz8KNHYYrgq6fAYnX";
 	
-	public static String blogSystem = "sina";  //sina or csdn
+	public static final String blogSina = "sina";
+	public static final String blogJianshu = "jianshu";
+	public static String blogSystem = blogJianshu;  //sina or csdn
+	
 }
