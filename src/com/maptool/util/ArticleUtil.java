@@ -61,10 +61,11 @@ public class ArticleUtil {
 			@Override
 			public void run() {
 				String content = HttpUtil.httpGet(url);
-				L.writeLogtoFile(content);
+				
 				if (content != null) {
 					Article article = BlogUtil.getArtcle(content);
 					if (listener != null) {
+						L.writeLogtoFile(article.getContent());
 						listener.onGetArticle(article);
 					}
 				}

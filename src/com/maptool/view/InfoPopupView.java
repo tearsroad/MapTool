@@ -38,7 +38,7 @@ public class InfoPopupView extends FrameLayout{
 		
 		tvDevicePos = (TextView)findViewById(R.id.textView_machinePos);
 		tvAddredd = (TextView)findViewById(R.id.textView_address);
-		tvStartTime = (TextView)findViewById(R.id.textView_startTime);
+//		tvStartTime = (TextView)findViewById(R.id.textView_startTime);
 		btnTo = (Button)findViewById(R.id.button_to);
 		btnStockout = (Button)findViewById(R.id.button_stockoout);
 		

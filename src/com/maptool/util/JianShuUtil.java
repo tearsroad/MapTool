@@ -60,7 +60,10 @@ public class JianShuUtil {
 		doc.getElementsByClass("wrap-btn").get(0).remove();
 		doc.getElementsByClass("fixed-btn").get(0).remove();
 		doc.getElementsByClass("article").get(0).attr("style","padding:5px 10px 10px 10px");
-		
+		doc.getElementsByClass("visitor_edit").get(0).remove();
+		doc.getElementsByClass("support-author").get(0).remove();
+		doc.getElementsByClass("meta-bottom").get(0).remove();
+		doc.getElementById("comments").remove();
 		// 获取url地址
 //		Element content = doc.getElementsByClass("show-content").get(0);
 //		Elements els = content.select("p");

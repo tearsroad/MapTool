@@ -1,58 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/popup_bg" >
-
+    android:layout_height="wrap_content"
+    android:id="@+id/pop_layout"
+    android:background="#00000000">
+	
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:layout_marginTop="25dp"
+	    android:background="@drawable/background_bottom1">
+	    
+	
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical" >
+        android:layout_margin="28dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/textView_machinePos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="机位：" />
+            style="@style/text_white_style"
+            android:textStyle="bold"
+            android:text="万达发放点" />
 
         <TextView
             android:id="@+id/textView_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="地址：" />
+            style="@style/text_white_style"
+            android:textSize="12dp"
+            android:text="（自助）" />
 
-        <TextView
-            android:id="@+id/textView_startTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="上班时间：" />
+        
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal" 
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="13dp">
 
         <Button
             android:id="@+id/button_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="到这儿去"
-            android:background="@drawable/popup_button_bg" />
+            style="@style/btn_textred_style"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="到这儿去" />
 
         <Button
             android:id="@+id/button_stockoout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="缺货上报"
-            android:background="@drawable/popup_button_bg" />
+            style="@style/btn_textyellow_style"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="详情" />
     </LinearLayout>
-
 </LinearLayout>
+<ImageView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/logo_homepage"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="25dp"/>
+</RelativeLayout>

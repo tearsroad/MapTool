@@ -6,4 +6,5 @@
     <color name="black">#000</color>
     <color name="radio_selected">#fc6401</color>
     <color name="radio_noselect">#fea702</color>
+    <color name="title_color">#70AC21</color>
 </resources>

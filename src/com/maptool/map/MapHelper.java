@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 
 import com.baidu.location.BDLocation;
@@ -22,7 +23,6 @@ import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BaiduMap.OnMyLocationClickListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
@@ -54,7 +54,7 @@ import com.maptool.lbs.MyLBS.LBSInteractionListener;
 import com.maptool.lbs.MyPoiInfo;
 import com.maptool.lbs.StockoutPoiInfo;
 import com.maptool.util.NetworkStateManager;
-import com.maptool.view.InfoPopupView;
+import com.maptool.view.MainSelectPicPopupWindow;
 
 public class MapHelper {
 
@@ -417,7 +417,7 @@ public class MapHelper {
 	/**
 	 * 位置弹出信息框事件回调类
 	 */
-	protected class MyInfoPopupListener implements InfoPopupView.InfoPopupListener {
+	protected class MyInfoPopupListener implements MainSelectPicPopupWindow.InfoPopupListener {
 		@Override
 		public void onToClick(MyPoiInfo info) {
 			mBaiduMap.hideInfoWindow();
@@ -489,9 +489,11 @@ public class MapHelper {
 	 * @param isNearby
 	 */
 	protected void showInfoWindow(LatLng ll,MyPoiInfo info, boolean isNearby){
-		InfoPopupView infoView = new InfoPopupView(mActivity.getApplicationContext(), info, isNearby, new MyInfoPopupListener());
-		InfoWindow mInfoWindow = new InfoWindow(infoView, ll, -47);
-		mBaiduMap.showInfoWindow(mInfoWindow);
+//		InfoPopupView infoView = new InfoPopupView(mActivity.getApplicationContext(), info, isNearby, new MyInfoPopupListener());
+//		InfoWindow mInfoWindow = new InfoWindow(infoView, ll, -47);
+//		mBaiduMap.showInfoWindow(mInfoWindow);
+		MainSelectPicPopupWindow mainSelectPicPopupWindow = new MainSelectPicPopupWindow(mActivity, info, isNearby, new MyInfoPopupListener());
+		mainSelectPicPopupWindow.showAtLocation(mActivity.findViewById(R.id.layoutAll), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置  
 	}
 
 	public void onDestroy() {

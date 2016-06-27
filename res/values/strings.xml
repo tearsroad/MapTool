@@ -9,5 +9,6 @@
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="title_activity_article_list">ArticleListActivity</string>
     <string name="title_activity_article">ArticleActivity</string>
+    <string name="title_activity_poi_detail">PoiDetailActivity</string>
 
 </resources>

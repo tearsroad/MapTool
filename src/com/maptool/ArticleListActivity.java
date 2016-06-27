@@ -50,8 +50,9 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(ArticleListActivity.this, MapActivity.class);
-				startActivity(intent);
+//				Intent intent = new Intent(ArticleListActivity.this, MapActivity.class);
+//				startActivity(intent);
+				finish();
 			}
 		});
 	}
