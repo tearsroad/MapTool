@@ -2,9 +2,12 @@ package com.maptool.util;
 
 import java.util.List;
 
+import android.util.Log;
+
 import com.maptool.artical.Article;
 import com.maptool.artical.ArticleItem;
 import com.maptool.artical.ArticleType;
+import com.maptool.common.L;
 
 /**
  * 文章工具类
@@ -58,6 +61,7 @@ public class ArticleUtil {
 			@Override
 			public void run() {
 				String content = HttpUtil.httpGet(url);
+				L.writeLogtoFile(content);
 				if (content != null) {
 					Article article = BlogUtil.getArtcle(content);
 					if (listener != null) {

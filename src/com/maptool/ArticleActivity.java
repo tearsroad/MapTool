@@ -56,11 +56,11 @@ public class ArticleActivity extends Activity {
 					@Override
 					public void run() {
 //						tvTitle.setText(article.getTitle());
-//						Log.e(TAG, article.getContent());
+						Log.e(TAG, article.getContent());
 //						String html = dealArticleContent(article.getContent());
-//						wvContent.loadData(html,
-//								"text/html;charset=utf-8", null);
-						wvContent.loadUrl(article.getLink());
+						wvContent.loadData(article.getContent(),
+								"text/html;charset=utf-8", null);
+//						wvContent.loadUrl(article.getLink());
 
 					}
 

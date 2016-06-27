@@ -40,32 +40,52 @@ public class JianShuUtil {
 		return list;
 	}
 
+	/**
+	 * dropdown-toggle logo
+	 * author-info
+	 * wrap-btn
+	 * @Description: TODO 
+	 * @param @param articleHTML
+	 * @param @return  
+	 * @return Article
+	 * @author 罗洪祥
+	 * @date 2016年6月27日 上午10:33:39
+	 */
 	public static Article getArtcle(String articleHTML) {
 		Article article = new Article();
 
 		Document doc = Jsoup.parse(articleHTML);
-
+		doc.getElementsByClass("author-info").get(0).remove();
+		doc.getElementsByClass("dropdown").get(0).remove();
+		doc.getElementsByClass("wrap-btn").get(0).remove();
+		doc.getElementsByClass("fixed-btn").get(0).remove();
+		doc.getElementsByClass("article").get(0).attr("style","padding:5px 10px 10px 10px");
+		
 		// 获取url地址
-		Element content = doc.getElementsByClass("show-content").get(0);
-		Elements els = content.select("p");
-		article.setLink(els.get(0).text());
+//		Element content = doc.getElementsByClass("show-content").get(0);
+//		Elements els = content.select("p");
+//		article.setLink(els.get(0).text());
 //		article.setTitle(ToDBC(title.text()));
 
 		// 获取正文
-//		Element articleElement = doc.getElementsByClass("articalContent")
+//		Element body = doc.body();
+////		body.
+//		Element articleElement = doc.getElementsByClass("preview")
 //				.get(0);
-//		//新浪博客的图片需要特殊处理
-//		Elements imgs =  articleElement.select("img");
-//		imgs.attr("style","");
-//		imgs.attr("width","");
-//		imgs.attr("height","");
-//		for(Element imgEle : imgs){
-//			String imageUrl =imgEle.attr("real_src");
-//			imgEle.select("img").attr("src",imageUrl);
-//		}
-//		String content = ToDBC(articleElement.html());
 //		
-//		article.setContent(content);
+
+////		//新浪博客的图片需要特殊处理
+////		Elements imgs =  articleElement.select("img");
+////		imgs.attr("style","");
+////		imgs.attr("width","");
+////		imgs.attr("height","");
+////		for(Element imgEle : imgs){
+////			String imageUrl =imgEle.attr("real_src");
+////			imgEle.select("img").attr("src",imageUrl);
+////		}
+//		String content = ToDBC(articleElement.html());
+		
+		article.setContent(doc.html());
 		return article;
 	}
 
