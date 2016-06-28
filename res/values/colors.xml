@@ -7,4 +7,6 @@
     <color name="radio_selected">#fc6401</color>
     <color name="radio_noselect">#fea702</color>
     <color name="title_color">#70AC21</color>
+    <color name="black1">#333333</color>
+    <color name="black3">#999999</color>
 </resources>

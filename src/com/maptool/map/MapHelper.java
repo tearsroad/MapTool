@@ -7,6 +7,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.ContextThemeWrapper;
@@ -46,6 +47,7 @@ import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.maptool.PoiDetailActivity;
 import com.maptool.R;
 import com.maptool.common.L;
 import com.maptool.common.MyError;
@@ -431,27 +433,28 @@ public class MapHelper {
 		@Override
 		public void onStockoutClick(final MyPoiInfo info) {
 			//缺货上报，先判断是否已经上报
-			mLBSHelper.isisStockout(info, new MyLBS.IsStockoutListener() {
-				@Override
-				public void onGetIsStockout(MyError err, final boolean isStockout) {
-					if(err==null){
-						mHandler.post(new Runnable() {
-							@Override
-							public void run() {
-								if(isStockout){
-									L.showToast("该地点已经上报");
-								}else{
-									showStockoutDialog(info);
-								}
-							}
-						});
-					}
-				}
-			});
-			
-			
-			//mLBSHelper.reportStockout(info);
-			mBaiduMap.hideInfoWindow();
+//			mLBSHelper.isisStockout(info, new MyLBS.IsStockoutListener() {
+//				@Override
+//				public void onGetIsStockout(MyError err, final boolean isStockout) {
+//					if(err==null){
+//						mHandler.post(new Runnable() {
+//							@Override
+//							public void run() {
+//								if(isStockout){
+//									L.showToast("该地点已经上报");
+//								}else{
+//									showStockoutDialog(info);
+//								}
+//							}
+//						});
+//					}
+//				}
+//			});
+//			
+//			
+//			//mLBSHelper.reportStockout(info);
+//			mBaiduMap.hideInfoWindow();
+			mActivity.startActivity(new Intent(mActivity,PoiDetailActivity.class));
 		}
 	}
 	
