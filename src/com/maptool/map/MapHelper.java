@@ -431,7 +431,7 @@ public class MapHelper {
 		}
 
 		@Override
-		public void onStockoutClick(final MyPoiInfo info) {
+		public void onStockoutClick(MyPoiInfo info) {
 			//缺货上报，先判断是否已经上报
 //			mLBSHelper.isisStockout(info, new MyLBS.IsStockoutListener() {
 //				@Override
@@ -454,7 +454,9 @@ public class MapHelper {
 //			
 //			//mLBSHelper.reportStockout(info);
 //			mBaiduMap.hideInfoWindow();
-			mActivity.startActivity(new Intent(mActivity,PoiDetailActivity.class));
+			Intent intent = new Intent(mActivity,PoiDetailActivity.class);
+			intent.putExtra("position", info);
+			mActivity.startActivity(intent);
 		}
 	}
 	

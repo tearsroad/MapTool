@@ -1,4 +1,4 @@
-package com.maptool.view;
+package com.maptool.view.adapter;
 
 import java.util.List;
 
@@ -50,6 +50,7 @@ public class ArticleListAdapter extends BaseAdapter {
             viewHolder=new ViewHolder();
             viewHolder.tv_name = (TextView)convertView.findViewById(R.id.tv_title);
             viewHolder.tv_manager = (TextView)convertView.findViewById(R.id.tv_url);
+            viewHolder.shoplogoImageView = (ImageView)convertView.findViewById(R.id.iv_small);
             convertView.setTag(viewHolder);
         }
         else{
@@ -57,9 +58,9 @@ public class ArticleListAdapter extends BaseAdapter {
         } 
 	    ArticleItem item = items.get(position);
         viewHolder.tv_name.setText(item.getTitle());
-        viewHolder.tv_manager.setText(item.getImgLink());
-//        imageLoader.loadImage(viewHolder.shoplogoImageView, item.getImgLink(), item.getImgLink()
-//        		, context.getResources().getDrawable(R.drawable.company_default_logo));
+//        viewHolder.tv_manager.setText(item.getImgLink());
+        imageLoader.loadImage(viewHolder.shoplogoImageView, item.getImgLink(), item.getImgLink()
+        		, context.getResources().getDrawable(R.drawable.company_default_logo));
         return convertView;
 	}
 	class ViewHolder {
@@ -67,9 +68,5 @@ public class ArticleListAdapter extends BaseAdapter {
         ImageView shoplogoImageView;
         LinearLayout ll_parent;
 	}
-	
-
-	
-	
 
 }

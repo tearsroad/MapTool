@@ -1,5 +1,7 @@
 package com.maptool.view;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -9,66 +11,44 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
+import android.view.WindowManager;
+import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.maptool.R;
+import com.maptool.artical.Article;
 import com.maptool.lbs.MyPoiInfo;
-import com.maptool.view.InfoPopupView.InfoPopupListener;
+import com.maptool.util.ScreenUtils;
+import com.maptool.view.adapter.SelectListAdapter;
 
-public class MainSelectPicPopupWindow extends PopupWindow {
-	TextView tvDevicePos;
-	TextView tvAddredd;
-	Button btnTo;
-	Button btnStockout;
-	
-	InfoPopupListener mListener;
-	MyPoiInfo mPoiInfo;
+public class SelectItemPopupWindow extends PopupWindow {
+	private ListView lvSelects;
+	private List<Article> mList;
 	private View mView;  
+	private Context mContext;
 	
 	public interface InfoPopupListener{
 		public void onToClick(MyPoiInfo info);
 		public void onStockoutClick(MyPoiInfo info);
 	}
   
-    public MainSelectPicPopupWindow(Context context,MyPoiInfo info,boolean isNearby,InfoPopupListener listener) {  
+    public SelectItemPopupWindow(Context context,List<Article> mList) {  
         super(context);  
+        mContext = context;
         LayoutInflater inflater = (LayoutInflater) context  
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
-        mView = inflater.inflate(R.layout.popup_info, null);
-		
-		mListener = listener;
-		mPoiInfo = info;
-		
-		tvDevicePos = (TextView)mView.findViewById(R.id.textView_machinePos);
-		tvAddredd = (TextView)mView.findViewById(R.id.textView_address);
-		btnTo = (Button)mView.findViewById(R.id.button_to);
-		btnStockout = (Button)mView.findViewById(R.id.button_stockoout);
-		
-//		if(isNearby){
-//			btnTo.setVisibility(View.GONE);
-//		}else{
-//			btnStockout.setVisibility(View.GONE);
-//		}
-		
-		// 显示数据
-		tvDevicePos.setText(mPoiInfo.device_pos);
-//		tvAddredd.setText(tvAddredd.getText()+mPoiInfo.address);
-		
-		btnTo.setOnClickListener(new View.OnClickListener() {
+        mView = inflater.inflate(R.layout.popup_item_info, null);
+        
+		this.mList = mList;
+		lvSelects = (ListView) mView.findViewById(R.id.lv_selects);
+		mView.findViewById(R.id.iv_close).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onToClick(mPoiInfo);
+				dismiss();
 			}
 		});
-		
-		btnStockout.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mListener.onStockoutClick(mPoiInfo);
-			}
-		});
+		SelectListAdapter adapter = new SelectListAdapter(context, mList);
+		lvSelects.setAdapter(adapter);
         //设置SelectPicPopupWindow的View  
         this.setContentView(mView);  
         //设置SelectPicPopupWindow弹出窗体的宽  
@@ -83,6 +63,7 @@ public class MainSelectPicPopupWindow extends PopupWindow {
         ColorDrawable dw = new ColorDrawable(0x00000000);  
         //设置SelectPicPopupWindow弹出窗体的背景  
         this.setBackgroundDrawable(dw);  
+        ScreenUtils.backgroundAlpha(mContext,0.5f);
         //mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框  
         mView.setOnTouchListener(new OnTouchListener() {  
               
@@ -100,4 +81,5 @@ public class MainSelectPicPopupWindow extends PopupWindow {
         });  
   
     }  
+    
 }

@@ -69,4 +69,28 @@ public class Article {
 	public String toString() {
 		return "{title}"+title+"{link}"+link;
 	}
+
+	public Article(String title, String content, String summary,
+			String imgLink, String link, int state, String commentCount) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.summary = summary;
+		this.imgLink = imgLink;
+		this.link = link;
+		this.state = state;
+		this.commentCount = commentCount;
+	}
+
+	public Article() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Article(String title, String link) {
+		super();
+		this.title = title;
+		this.link = link;
+	}
+	
 }

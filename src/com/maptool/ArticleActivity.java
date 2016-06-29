@@ -31,7 +31,7 @@ public class ArticleActivity extends Activity {
 		setContentView(R.layout.activity_article);
 
 		mHandler = new Handler();
-		tvTitle = (TextView) findViewById(R.id.textView_title);
+		tvTitle = (TextView) findViewById(R.id.tv_title);
 		wvContent = (ProgressWebView) findViewById(R.id.webView_content);
 
 //		wvContent.setWebChromeClient(new WebChromeClient());
@@ -47,7 +47,7 @@ public class ArticleActivity extends Activity {
 		Intent intent = getIntent();
 		String url = intent.getStringExtra("url");
 		Log.i(TAG, "url:"+url);
-		
+		tvTitle.setText(intent.getStringExtra("title"));
 		
 		ArticleUtil.getArticle(url, new GetArticleListener() {
 			@Override
@@ -69,14 +69,12 @@ public class ArticleActivity extends Activity {
 			}
 		});
 
-		mBackButton = (ImageView) findViewById(R.id.map);
+		mBackButton = (ImageView) findViewById(R.id.iv_back);
 		mBackButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(ArticleActivity.this,
-						MapActivity.class);
-				startActivity(intent);
+				finish();
 			}
 		});
 	}

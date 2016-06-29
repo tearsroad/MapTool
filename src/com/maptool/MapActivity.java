@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -41,7 +42,7 @@ public class MapActivity extends Activity implements View.OnClickListener {
 	RadioGroup rgRadius;
 	RadioButton rb500, rb1000, rb2000;
 	// Button btnRefresh;
-	Button btnArticles;
+	ImageButton btnArticles;
 	private UiSettings mUiSettings;
 
 	@Override
@@ -99,7 +100,7 @@ public class MapActivity extends Activity implements View.OnClickListener {
 		// btnRefresh = (Button) findViewById(R.id.btn_refresh);
 		// btnRefresh.setOnClickListener(this);
 
-		btnArticles = (Button) findViewById(R.id.button_articles);
+		btnArticles = (ImageButton) findViewById(R.id.button_articles);
 		btnArticles.setOnClickListener(this);
 	}
 	private void setRadioBtnTextColor(int checkedId){

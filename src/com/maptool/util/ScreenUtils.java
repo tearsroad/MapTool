@@ -117,4 +117,14 @@ public class ScreenUtils
 		view.destroyDrawingCache();
 		return bp;
 	}
+	/**
+	 * 设置添加屏幕的背景透明度
+	 * @param bgAlpha
+	 */
+	public static void backgroundAlpha(Context mContext,float bgAlpha)
+	{
+		WindowManager.LayoutParams lp = ((Activity) mContext).getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        ((Activity) mContext).getWindow().setAttributes(lp);
+	}
 }

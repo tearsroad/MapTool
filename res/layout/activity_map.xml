@@ -23,27 +23,32 @@
             android:layout_alignParentTop="true"
             android:background="@drawable/tt_logo" />
              -->
-
-        <Button
-            android:id="@+id/button_articles"
-            android:layout_width="21dp"
-            android:layout_height="16dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
-            android:textColor="#fff"
-            android:background="@drawable/more_icon" />
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/button_articles"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="21dp"
-            android:text="附近免费发放点" />
+		<LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:gravity="center_vertical">
+		    
+		    <ImageButton
+	            android:id="@+id/button_articles"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:padding="13dp"
+	            android:textColor="#fff"
+	            android:background="@null"
+	            android:src="@drawable/more_icon" />
+	
+	        <TextView
+	            android:id="@+id/textView1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_toRightOf="@id/button_articles"
+	            android:textColor="@color/white"
+	            android:textSize="18dp"
+	            android:text="附近免费发放点" />
+		</LinearLayout>
+        
 
     </RelativeLayout>
 

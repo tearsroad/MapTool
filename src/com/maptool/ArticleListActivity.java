@@ -21,7 +21,7 @@ import com.maptool.artical.ArticleItem;
 import com.maptool.artical.ArticleType;
 import com.maptool.util.ArticleUtil;
 import com.maptool.util.ArticleUtil.GetArticleListListener;
-import com.maptool.view.ArticleListAdapter;
+import com.maptool.view.adapter.ArticleListAdapter;
 
 public class ArticleListActivity extends Activity implements OnItemClickListener{
 
@@ -100,6 +100,7 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 			ArticleItem article = mArticleItems.get(position);
 			Intent intent = new Intent(this , ArticleActivity.class);
 			intent.putExtra("url", article.getLink());
+			intent.putExtra("title", article.getTitle());
 			startActivity(intent);
 		}
 	}
