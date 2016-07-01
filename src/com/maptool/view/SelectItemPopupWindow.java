@@ -17,13 +17,14 @@ import android.widget.PopupWindow;
 
 import com.maptool.R;
 import com.maptool.artical.Article;
+import com.maptool.lbs.FFMsgItem;
 import com.maptool.lbs.MyPoiInfo;
 import com.maptool.util.ScreenUtils;
 import com.maptool.view.adapter.SelectListAdapter;
 
 public class SelectItemPopupWindow extends PopupWindow {
 	private ListView lvSelects;
-	private List<Article> mList;
+	private List<FFMsgItem> mList;
 	private View mView;  
 	private Context mContext;
 	
@@ -32,7 +33,7 @@ public class SelectItemPopupWindow extends PopupWindow {
 		public void onStockoutClick(MyPoiInfo info);
 	}
   
-    public SelectItemPopupWindow(Context context,List<Article> mList) {  
+    public SelectItemPopupWindow(Context context,List<FFMsgItem> mList) {  
         super(context);  
         mContext = context;
         LayoutInflater inflater = (LayoutInflater) context  

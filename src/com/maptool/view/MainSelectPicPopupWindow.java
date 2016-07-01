@@ -53,7 +53,12 @@ public class MainSelectPicPopupWindow extends PopupWindow {
 //		}
 		
 		// 显示数据
-		tvDevicePos.setText(mPoiInfo.device_pos);
+		tvDevicePos.setText(mPoiInfo.title);
+		String ffxingshi = mPoiInfo.getFfxingshiMsg();
+		if(ffxingshi==null)
+			tvAddredd.setText("");
+		else
+			tvAddredd.setText("（"+ffxingshi+"）");
 //		tvAddredd.setText(tvAddredd.getText()+mPoiInfo.address);
 		
 		btnTo.setOnClickListener(new View.OnClickListener() {

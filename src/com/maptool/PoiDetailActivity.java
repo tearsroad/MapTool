@@ -39,9 +39,22 @@ public class PoiDetailActivity extends Activity {
 	}
 	private void initData() {
 		if(poiInfo==null)finish();
-		tvTitle.setText(poiInfo.device_pos);
+		tvTitle.setText(poiInfo.title);
 		tvAddr.setText(poiInfo.address);
-		tvTime.setText("上班时间：  "+poiInfo.start_time);
+		tvTime.setText("上午时间: "+ToDBC(poiInfo.start_time)+"\n"+
+				"下午时间: "+ToDBC(poiInfo.end_time));
+	}
+	public static String ToDBC(String input) {
+		char[] c = input.toCharArray();
+		for (int i = 0; i < c.length; i++) {
+			if (c[i] == 12288) {
+				c[i] = (char) 32;
+				continue;
+			}
+			if (c[i] > 65280 && c[i] < 65375)
+				c[i] = (char) (c[i] - 65248);
+		}
+		return new String(c);
 	}
 	private void initView(){
 		btnSend = (Button) findViewById(R.id.btn_shangbao);
@@ -50,6 +63,18 @@ public class PoiDetailActivity extends Activity {
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		tvAddr = (TextView) findViewById(R.id.tv_address);
 		tvTime = (TextView) findViewById(R.id.tv_time);
+		tvTitle.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(tvTitle.isSelected()){
+					tvTitle.setSelected(false);
+				}else{
+					tvTitle.setSelected(true);
+				}
+			}
+		});
+		
 	}
 	private OnClickListener clickListener = new OnClickListener() {
 		
@@ -61,7 +86,7 @@ public class PoiDetailActivity extends Activity {
 				
 				break;
 			case R.id.rl_ffpz:
-				SelectItemPopupWindow selectItemPopupWindow = new SelectItemPopupWindow(PoiDetailActivity.this, getList());
+				SelectItemPopupWindow selectItemPopupWindow = new SelectItemPopupWindow(PoiDetailActivity.this, poiInfo.getFfpingzhong());
 				selectItemPopupWindow.showAtLocation(findViewById(R.id.layoutAll), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 				selectItemPopupWindow.setOnDismissListener(new OnDismissListener() {
 					@Override
@@ -71,7 +96,7 @@ public class PoiDetailActivity extends Activity {
 				});
 				break;
 			case R.id.rl_fflx:
-				SelectItemPopupWindow selectItemPopupWindow2 = new SelectItemPopupWindow(PoiDetailActivity.this, getList2());
+				SelectItemPopupWindow selectItemPopupWindow2 = new SelectItemPopupWindow(PoiDetailActivity.this, poiInfo.getFfxingshi());
 				selectItemPopupWindow2.showAtLocation(findViewById(R.id.layoutAll), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 				selectItemPopupWindow2.setOnDismissListener(new OnDismissListener() {
 					@Override
@@ -88,17 +113,5 @@ public class PoiDetailActivity extends Activity {
 			}
 		}
 	};
-	private List<Article> getList(){
-		List<Article> list = new ArrayList<Article>();
-		list.add(new Article("测试1","www.baidu.com"));
-		list.add(new Article("测试2","www.baidu.com"));
-		return list;
-	}
-	private List<Article> getList2(){
-		List<Article> list = new ArrayList<Article>();
-		list.add(new Article("测试1","www.baidu.com"));
-		list.add(new Article("测试2","www.baidu.com"));
-		list.add(new Article("测试3","www.baidu.com"));
-		return list;
-	}
+	
 }

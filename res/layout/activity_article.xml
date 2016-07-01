@@ -30,7 +30,7 @@
             android:layout_marginRight="5dp"
             android:singleLine="true"
             android:ellipsize="end"
-            android:text="士大夫爱疯士大夫爱疯士大夫爱疯士大夫爱疯士大夫爱疯" />
+            android:text="" />
     </RelativeLayout>
     <ScrollView
         android:id="@+id/scrollView1"

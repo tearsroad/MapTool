@@ -9,23 +9,21 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maptool.R;
 import com.maptool.artical.Article;
-import com.maptool.artical.ArticleItem;
 import com.maptool.common.AsyncImageListLoader;
+import com.maptool.lbs.FFMsgItem;
 
 
 public class SelectListAdapter extends BaseAdapter {
-	List<Article> items;
+	List<FFMsgItem> items;
 	Context context;
 	private int parentPositon;
 	private AsyncImageListLoader imageLoader;
-	public SelectListAdapter(Context context, List<Article> items) {
+	public SelectListAdapter(Context context, List<FFMsgItem> items) {
 		this.context = context;
 		this.items = items;
 		imageLoader = new AsyncImageListLoader(context);
@@ -58,7 +56,8 @@ public class SelectListAdapter extends BaseAdapter {
         else{
             viewHolder = (ViewHolder)convertView.getTag();
         } 
-	    final Article item = items.get(position);
+	    final FFMsgItem item = items.get(position);
+	    viewHolder.btnSelect.setText(item.getTitle());
         viewHolder.btnSelect.setOnClickListener(new OnClickListener() {
 			
 			@Override
