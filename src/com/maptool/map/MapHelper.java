@@ -51,7 +51,6 @@ import com.maptool.PoiDetailActivity;
 import com.maptool.R;
 import com.maptool.common.L;
 import com.maptool.common.MyError;
-import com.maptool.lbs.MyLBS;
 import com.maptool.lbs.MyLBS.LBSInteractionListener;
 import com.maptool.lbs.MyPoiInfo;
 import com.maptool.lbs.StockoutPoiInfo;
@@ -71,7 +70,7 @@ public class MapHelper {
 	BaiduMap mBaiduMap = null;
 	
 	// 普通图还是卫星图
-	int mCurMapType = BaiduMap.MAP_TYPE_NORMAL;
+	public int mCurMapType = BaiduMap.MAP_TYPE_NORMAL;
 
 	// 定位
 	LocationClient mLocClient;
@@ -91,7 +90,8 @@ public class MapHelper {
 //	MyPoiInfo mReachPoiInfo = null;  // 暂存附近机子（用来判断是否离开这个机子了）
 
 	// 图标
-	BitmapDescriptor mCurrentMarker = null;
+	BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
+            .fromResource(R.drawable.current_position1_2);
 	BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(R.drawable.position1);
 
 	// 弹出框
@@ -190,7 +190,19 @@ public class MapHelper {
 			}
 		});
 	}
-	
+	/**
+	 * 设置我的位置的图标
+	 */
+	public void setMyLocationIcon(int draId,boolean isQuit){
+		if(mBaiduMap==null)return;
+		
+		// 图标
+		BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
+	            .fromResource(draId);
+		if(isQuit)return;
+		mBaiduMap.setMyLocationEnabled(true);
+		mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(LocationMode.NORMAL, true, mCurrentMarker));
+	}
 	public LatLng getCurPos(){
 		return mCurLatLng;
 	}
@@ -322,7 +334,14 @@ public class MapHelper {
 				// 第一次定位成功，搜索周围物品
 				searchNearby();
 			}
+			// 修改为自定义marker
 			
+		    
+//		    BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
+//	                .fromResource(R.drawable.current_position1_1);
+//	        mBaiduMap
+//	                .setMyLocationConfigeration(new MyLocationConfiguration(
+//	                		null, true, mCurrentMarker));
 			//判断附近是否有物品 
 			//2015年5月11日  取消，因为不需要自动弹出了
 			/*if(mPoiInfoCache != null){
@@ -382,6 +401,7 @@ public class MapHelper {
 		@Override
 		public void onGetTransitRouteResult(TransitRouteResult result) {
 		}
+
 	}
 
 	/**
@@ -431,7 +451,7 @@ public class MapHelper {
 		}
 
 		@Override
-		public void onStockoutClick(MyPoiInfo info) {
+		public void onStockoutClick(MyPoiInfo info,boolean isNearby) {
 			//缺货上报，先判断是否已经上报
 //			mLBSHelper.isisStockout(info, new MyLBS.IsStockoutListener() {
 //				@Override
@@ -456,6 +476,7 @@ public class MapHelper {
 //			mBaiduMap.hideInfoWindow();
 			Intent intent = new Intent(mActivity,PoiDetailActivity.class);
 			intent.putExtra("position", info);
+			intent.putExtra("isNearby", isNearby);
 			mActivity.startActivity(intent);
 		}
 	}

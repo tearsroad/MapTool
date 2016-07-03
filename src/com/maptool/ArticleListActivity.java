@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.maptool.artical.ArticleItem;
 import com.maptool.artical.ArticleType;
@@ -29,6 +30,8 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 	private ImageView mBackButton;
 	private ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
 	private List<ArticleItem> mArticleItems;
+	private String title;
+	private TextView tvTitle;
 
 	private Handler mHandler = new Handler(){
 		public void handleMessage(Message msg) {
@@ -42,9 +45,11 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 		setContentView(R.layout.activity_article_listview);
 		// 绑定XML中的ListView，作为Item的容器
 		mListView = (ListView) findViewById(R.id.listview);
+		tvTitle = (TextView) findViewById(R.id.textView1);
 		mListView.setOnItemClickListener(this);
 		initData();
-		
+		title = getIntent().getStringExtra("title");
+		tvTitle.setText(title);
 		mBackButton = (ImageView) findViewById(R.id.map);
 		mBackButton.setOnClickListener(new OnClickListener() {
 			

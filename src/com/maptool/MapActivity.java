@@ -1,12 +1,14 @@
 package com.maptool;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +18,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -25,14 +26,18 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMapOptions;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
+import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.maptool.common.L;
 import com.maptool.map.MapHelper;
 import com.maptool.util.ScreenUtils;
 import com.maptool.util.SystemStatusManager;
-import com.maptool.util.ToolsUtil;
 
 public class MapActivity extends Activity implements View.OnClickListener {
 	private static final String PreferenceName = "mapinfo";
@@ -44,7 +49,10 @@ public class MapActivity extends Activity implements View.OnClickListener {
 	// Button btnRefresh;
 	ImageButton btnArticles;
 	private UiSettings mUiSettings;
-
+	BaiduMap mBaiduMap;
+	Timer timer = new Timer(); 
+	private boolean isIconNormal=false;
+	private boolean isQuit = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,11 +67,12 @@ public class MapActivity extends Activity implements View.OnClickListener {
 		BaiduMapOptions option = new BaiduMapOptions();
 		option.zoomControlsEnabled(false);
 		MapView mapView = new MapView(this, option);
-		BaiduMap mBaiduMap = mapView.getMap();
+		mBaiduMap = mapView.getMap();
 	    mUiSettings = mBaiduMap.getUiSettings();
 	    mUiSettings.setCompassEnabled(false);
 	    mUiSettings.setRotateGesturesEnabled(false);
 	    mUiSettings.setOverlookingGesturesEnabled(false);
+	 
 //	    Point arg0 = new Point(10, 60);
 //	    mUiSettings.setCompassPosition(arg0);
 		setContentView(mapView);
@@ -102,6 +111,10 @@ public class MapActivity extends Activity implements View.OnClickListener {
 
 		btnArticles = (ImageButton) findViewById(R.id.button_articles);
 		btnArticles.setOnClickListener(this);
+		timer.cancel();
+		timer = null;
+		timer = new Timer();
+		timer.schedule(task, 0, 200);
 	}
 	private void setRadioBtnTextColor(int checkedId){
 		rb500.setTextColor(getResources().getColor(R.color.radio_noselect));
@@ -121,6 +134,7 @@ public class MapActivity extends Activity implements View.OnClickListener {
 		super.onPause();
 		savePos();
 		mMapHelper.onPause();
+		isQuit = true;
 	}
 
 	@Override
@@ -131,13 +145,16 @@ public class MapActivity extends Activity implements View.OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		isQuit = false;
 		mMapHelper.onResume();
+		
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		mMapHelper.onDestroy();
+		timer.cancel();
 	}
 	//设置系统状态栏  
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)  
@@ -233,4 +250,20 @@ public class MapActivity extends Activity implements View.OnClickListener {
 					}
 				}).show();
 	}
+	TimerTask task = new TimerTask() {    
+        @Override    
+        public void run() {    
+   
+            runOnUiThread(new Runnable() {      // UI thread    
+                @Override    
+                public void run() {  
+                	if(isIconNormal)
+                		mMapHelper.setMyLocationIcon(R.drawable.current_position1_2,isQuit);
+                	else
+                		mMapHelper.setMyLocationIcon(R.drawable.icon_nil,isQuit);
+                	isIconNormal = !isIconNormal;
+                }    
+            });    
+        }    
+    };  
 }

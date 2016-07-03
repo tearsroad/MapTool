@@ -31,12 +31,12 @@ public class WelcomeActivity extends Activity {
 		NetworkStateManager.instance().init(this);
 		boolean isNetworkConnected = NetworkStateManager.instance()
 				.isNetworkConnected();
-
-		if (!isNetworkConnected) {
-			dialog();
-		}else{
-			showWelcomePage();
-		}
+		showWelcomePage();
+//		if (!isNetworkConnected) {
+//			dialog();
+//		}else{
+//			showWelcomePage();
+//		}
 	}
 	
 	@Override
@@ -50,11 +50,11 @@ public class WelcomeActivity extends Activity {
 			@Override
 			public void run() {
 				Intent intent = new Intent(WelcomeActivity.this,
-						MapActivity.class);
+						Welcome2Activity.class);
 				startActivity(intent);
 				finish();
 			}
-		}, 2000);
+		}, 5000);
 	}
 
 	protected void dialog() {

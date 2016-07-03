@@ -2,7 +2,7 @@ package com.maptool.common;
 
 public class Const {
 	public static final String app_name = "map";
-	public static final boolean debug = false; 
+	public static final boolean debug = true; 
 	
 	
 	//全部计生用品表id

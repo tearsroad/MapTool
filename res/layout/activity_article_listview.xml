@@ -45,6 +45,8 @@
         android:id="@+id/listview"
         android:layout_below="@id/ll_logo"
         android:layout_width="match_parent"
+        android:dividerHeight="10dp"
+        android:divider="#eeeeee"
         android:layout_height="wrap_content" >
     </ListView>
 

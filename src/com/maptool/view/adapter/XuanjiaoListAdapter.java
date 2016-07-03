@@ -16,25 +16,22 @@ import com.maptool.artical.ArticleItem;
 import com.maptool.common.AsyncImageListLoader;
 
 
-public class ArticleListAdapter extends BaseAdapter {
-	List<ArticleItem> items;
+public class XuanjiaoListAdapter extends BaseAdapter {
+	String[] items;
 	Context context;
-	private int parentPositon;
-	private AsyncImageListLoader imageLoader;
-	public ArticleListAdapter(Context context, List<ArticleItem> items) {
+	public XuanjiaoListAdapter(Context context, String[] items) {
 		this.context = context;
 		this.items = items;
-		imageLoader = new AsyncImageListLoader(context);
 		
 	}
 	@Override
 	public int getCount() {
-		return items.size();
+		return items.length;
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return items.get(position);
+		return items[position];
 	}
 
 	@Override
@@ -46,26 +43,20 @@ public class ArticleListAdapter extends BaseAdapter {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 	    ViewHolder viewHolder = null;
 	    if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_listview_article, null);          
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_listview_xuanjiao, null);          
             viewHolder=new ViewHolder();
             viewHolder.tv_name = (TextView)convertView.findViewById(R.id.tv_title);
-            viewHolder.tv_manager = (TextView)convertView.findViewById(R.id.tv_url);
-            viewHolder.shoplogoImageView = (ImageView)convertView.findViewById(R.id.iv_small);
             convertView.setTag(viewHolder);
         }
         else{
             viewHolder = (ViewHolder)convertView.getTag();
         } 
-	    ArticleItem item = items.get(position);
-        viewHolder.tv_name.setText(item.getTitle());
-//        viewHolder.tv_manager.setText(item.getImgLink());
-        imageLoader.loadImage(viewHolder.shoplogoImageView, item.getImgLink(), item.getImgLink()
-        		, context.getResources().getDrawable(R.drawable.default_pic));
+	    String item = items[position];
+        viewHolder.tv_name.setText(item);
         return convertView;
 	}
 	class ViewHolder {
-        TextView tv_name,headcount,tv_manager;
-        ImageView shoplogoImageView;
+        TextView tv_name;
         LinearLayout ll_parent;
 	}
 

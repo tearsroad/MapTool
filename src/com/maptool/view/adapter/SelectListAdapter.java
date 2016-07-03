@@ -3,6 +3,9 @@ package com.maptool.view.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
+import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,6 +15,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.maptool.Info_ffpz1_Activity;
 import com.maptool.R;
 import com.maptool.artical.Article;
 import com.maptool.common.AsyncImageListLoader;
@@ -23,10 +27,12 @@ public class SelectListAdapter extends BaseAdapter {
 	Context context;
 	private int parentPositon;
 	private AsyncImageListLoader imageLoader;
-	public SelectListAdapter(Context context, List<FFMsgItem> items) {
+	private Handler handler;
+	public SelectListAdapter(Context context, List<FFMsgItem> items,Handler handler) {
 		this.context = context;
 		this.items = items;
 		imageLoader = new AsyncImageListLoader(context);
+		this.handler = handler;
 		
 	}
 	@Override
@@ -63,7 +69,11 @@ public class SelectListAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(context, item.getTitle(), Toast.LENGTH_LONG).show();
+//				Toast.makeText(context, item.getTitle(), Toast.LENGTH_LONG).show();
+				handler.sendEmptyMessage(1);
+				Intent intent = new Intent(context, Info_ffpz1_Activity.class);
+				context.startActivity(intent);
+				
 			}
 		});
         return convertView;

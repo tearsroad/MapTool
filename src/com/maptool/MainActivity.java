@@ -21,7 +21,6 @@ import com.baidu.mapapi.cloud.CloudManager;
 import com.baidu.mapapi.cloud.CloudPoiInfo;
 import com.baidu.mapapi.cloud.CloudSearchResult;
 import com.baidu.mapapi.cloud.DetailSearchResult;
-import com.baidu.mapapi.cloud.NearbySearchInfo;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -437,4 +436,6 @@ public class MainActivity extends Activity implements OnClickListener,
 			Log.d(TAG, ""+result.size);
 		}
 	}
+
+	
 }

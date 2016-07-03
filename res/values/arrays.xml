@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="stockout_reason">
-        <item>无货</item>
-        <item>没人领不到东西</item>
-        <item>没有我要的东西</item>
-        <item>位置不对</item>
+        <item>地址不正确</item>
+        <item>找不到工作人员</item>
+        <item>机器不能正常使用</item>
+        <item>没有东西可以领取</item>
+        <item>东西过期</item>
     </array>
 </resources>

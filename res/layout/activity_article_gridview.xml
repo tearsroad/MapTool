@@ -10,42 +10,87 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@color/title_color" >
-		<ImageView
-            android:id="@+id/map"
-            android:layout_width="53dp"
-            android:layout_height="48dp"
-            android:background="@drawable/left_arrow"
-            android:layout_centerVertical="true" />
-        <TextView
-            android:id="@+id/textView1"
+        android:background="@drawable/background_top" >
+        <RelativeLayout 
+            android:id="@+id/rl_back"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content">
+            
+        
+			<ImageView
+	            android:id="@+id/map"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/back_icon"
+	            android:layout_centerVertical="true" 
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="16dp"/>
+	        <TextView
+	            android:id="@+id/textView1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="48dp"
+	            android:layout_centerVertical="true"
+	            android:gravity="center_vertical"
+	            android:textColor="@color/white"
+	            android:textSize="20sp"
+	            android:layout_marginLeft="4dp"
+	            android:layout_toRightOf="@id/map"
+	            android:text="回到发放点" />
+        </RelativeLayout>
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@id/map"
-            android:text="@string/app_name" />
-        <!-- 
-        <ImageView
-            android:id="@+id/ImageView1"
-            android:layout_width="127dp"
-            android:layout_height="48dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/tt_logo" /> -->
+            android:layout_marginLeft="14dp"
+            android:paddingTop="18dp">
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic2"/>
+            <LinearLayout 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="12dp"
+                android:layout_gravity="center_vertical">
+                <TextView 
+                    style="@style/text_white_style"
+                    android:textSize="14dp"
+                    android:text="xingfuyizhan"/>
+                <TextView 
+                    style="@style/text_white_style"
+                    android:textSize="24dp"
+                    android:layout_marginTop="3dp"
+                    android:text="幸福驿站"/>
+            </LinearLayout>
+        </LinearLayout>
 
         
     </RelativeLayout>
-
+	<ListView 
+        android:id="@+id/lv_article"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:divider="@color/line_color"
+    	android:dividerHeight="0.3dp"
+    	android:layout_marginTop="20dp"
+    	android:layout_below="@id/ll_logo">
+        
+    </ListView>
+    <View 
+	        android:layout_width="match_parent"
+	        android:layout_height="0.3dp"
+	        android:background="#CCCCCC"
+	        android:layout_below="@id/lv_article"
+	        />
     <GridView
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/ll_logo"
         android:columnWidth="80dp"
+        android:visibility="gone"
         android:gravity="center"
         android:horizontalSpacing="20dp"
         android:numColumns="auto_fit"
@@ -55,5 +100,11 @@
         android:paddingRight="20dp"
         android:background="@color/content_bg" >
     </GridView>
-
+	<ImageView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/pic1"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="56dp"
+	    android:layout_marginTop="153dp"/>
 </RelativeLayout>

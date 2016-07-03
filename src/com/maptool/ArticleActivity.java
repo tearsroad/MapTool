@@ -24,6 +24,7 @@ public class ArticleActivity extends Activity {
 	ProgressWebView wvContent;
 	Handler mHandler;
 	private ImageView mBackButton;
+	private boolean isNormal = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,26 +49,32 @@ public class ArticleActivity extends Activity {
 		String url = intent.getStringExtra("url");
 		Log.i(TAG, "url:"+url);
 		tvTitle.setText(intent.getStringExtra("title"));
+		isNormal = intent.getBooleanExtra("isNormal", false);
+		if(isNormal){
+			wvContent.loadUrl(url);
+		}else{
+			ArticleUtil.getArticle(url, new GetArticleListener() {
+				@Override
+				public void onGetArticle(final Article article) {
+					mHandler.post(new Runnable() {
+						@Override
+						public void run() {
+//							tvTitle.setText(article.getTitle());
+							Log.e(TAG, article.getContent());
+//							String html = dealArticleContent(article.getContent());
+							wvContent.loadData(article.getContent(),
+									"text/html;charset=utf-8", null);
+//							wvContent.loadUrl(article.getLink());
+
+						}
+
+						
+					});
+				}
+			});
+		}
 		
-		ArticleUtil.getArticle(url, new GetArticleListener() {
-			@Override
-			public void onGetArticle(final Article article) {
-				mHandler.post(new Runnable() {
-					@Override
-					public void run() {
-//						tvTitle.setText(article.getTitle());
-						Log.e(TAG, article.getContent());
-//						String html = dealArticleContent(article.getContent());
-						wvContent.loadData(article.getContent(),
-								"text/html;charset=utf-8", null);
-//						wvContent.loadUrl(article.getLink());
-
-					}
-
-					
-				});
-			}
-		});
+		
 
 		mBackButton = (ImageView) findViewById(R.id.iv_back);
 		mBackButton.setOnClickListener(new OnClickListener() {

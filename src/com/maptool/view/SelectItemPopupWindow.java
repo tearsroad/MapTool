@@ -5,6 +5,8 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,7 +50,7 @@ public class SelectItemPopupWindow extends PopupWindow {
 				dismiss();
 			}
 		});
-		SelectListAdapter adapter = new SelectListAdapter(context, mList);
+		SelectListAdapter adapter = new SelectListAdapter(context, mList,handler);
 		lvSelects.setAdapter(adapter);
         //设置SelectPicPopupWindow的View  
         this.setContentView(mView);  
@@ -82,5 +84,14 @@ public class SelectItemPopupWindow extends PopupWindow {
         });  
   
     }  
+    private Handler handler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			dismiss();
+			super.handleMessage(msg);
+		}
+    	
+    };
     
 }

@@ -29,10 +29,10 @@ public class MainSelectPicPopupWindow extends PopupWindow {
 	
 	public interface InfoPopupListener{
 		public void onToClick(MyPoiInfo info);
-		public void onStockoutClick(MyPoiInfo info);
+		public void onStockoutClick(MyPoiInfo info,boolean isNearby);
 	}
   
-    public MainSelectPicPopupWindow(Context context,MyPoiInfo info,boolean isNearby,InfoPopupListener listener) {  
+    public MainSelectPicPopupWindow(Context context,MyPoiInfo info,final boolean isNearby,InfoPopupListener listener) {  
         super(context);  
         LayoutInflater inflater = (LayoutInflater) context  
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
@@ -65,13 +65,15 @@ public class MainSelectPicPopupWindow extends PopupWindow {
 			@Override
 			public void onClick(View v) {
 				mListener.onToClick(mPoiInfo);
+				dismiss();
 			}
 		});
 		
 		btnStockout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mListener.onStockoutClick(mPoiInfo);
+				mListener.onStockoutClick(mPoiInfo,isNearby);
+				dismiss();
 			}
 		});
         //设置SelectPicPopupWindow的View  

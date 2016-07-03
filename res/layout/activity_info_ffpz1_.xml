@@ -1,0 +1,154 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/ll_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/background_top" >
+        <RelativeLayout 
+            android:id="@+id/rl_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+        
+			<ImageView
+	            android:id="@+id/map"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/back_icon"
+	            android:layout_centerVertical="true" 
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="16dp"/>
+	        <TextView
+	            android:id="@+id/textView1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="48dp"
+	            android:layout_centerVertical="true"
+	            android:gravity="center_vertical"
+	            android:textColor="@color/white"
+	            android:textSize="20sp"
+	            android:layout_marginLeft="4dp"
+	            android:layout_toRightOf="@id/map"
+	            android:text="返回发放点信息" />
+        </RelativeLayout>
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:paddingTop="18dp">
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pic2"/>
+            <LinearLayout 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="12dp"
+                android:layout_gravity="center_vertical">
+                <TextView 
+                    style="@style/text_white_style"
+                    android:textSize="16dp"
+                    android:text="外用避孕药"/>
+                <TextView 
+                    style="@style/text_white_style"
+                    android:textSize="24dp"
+                    android:layout_marginTop="3dp"
+                    android:text="避孕有效率为85%"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        
+    </RelativeLayout>
+	<ScrollView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_below="@id/ll_logo"
+	    android:layout_marginTop="22dp"
+	    android:scrollbars="none">
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:padding="10dp">
+	        <TextView 
+	            style="@style/text_green_style"
+	            android:text="它是什么"/>
+
+	        <TextView
+	            style="@style/text_gray_style"
+	            android:layout_width="match_parent"
+	            android:layout_marginTop="24dp"
+	            android:paddingRight="0dp"
+	            android:layout_marginRight="0dp"
+	            android:text="它是杀精剂，使用前将它放置于阴道，无需带套吃药，无忧避孕，无忧避孕" />
+
+	        <View 
+		        android:layout_width="match_parent"
+		        android:layout_height="0.3dp"
+		        android:layout_marginTop="10dp"
+		        android:background="#CCCCCC"/>
+	        <TextView
+	            style="@style/text_gray_style"
+	            android:layout_width="match_parent"
+	            android:layout_marginTop="24dp"
+	            android:paddingRight="0dp"
+	            android:layout_marginRight="0dp"
+	            android:text="它是杀精剂，使用前将它放置于阴道，无需带套吃药，无忧避孕，无忧避孕，无忧避孕" />
+
+	        <View 
+		        android:layout_width="match_parent"
+		        android:layout_height="0.3dp"
+		        android:layout_marginTop="10dp"
+		        android:background="#CCCCCC"/>
+	        
+	        <!-- 怎么领取 -->
+	        <TextView 
+	            style="@style/text_green_style"
+	            android:layout_marginTop="44dp"
+	            android:text="怎么领取"/>
+
+	        <TextView
+	            style="@style/text_gray_style"
+	            android:layout_width="match_parent"
+	            android:layout_marginTop="24dp"
+	            android:paddingRight="0dp"
+	            android:layout_marginRight="0dp"
+	            android:text="它是杀精剂，使用前将它放置于阴道，无需带套吃药，无忧避孕，无忧避孕，无忧避孕，无忧避孕" />
+
+	        <View 
+		        android:layout_width="match_parent"
+		        android:layout_height="0.3dp"
+		        android:layout_marginTop="10dp"
+		        android:background="#CCCCCC"/>
+	        <TextView
+	            style="@style/text_gray_style"
+	            android:layout_width="match_parent"
+	            android:layout_marginTop="24dp"
+	            android:paddingRight="0dp"
+	            android:layout_marginRight="0dp"
+	            android:text="它是杀精剂，使用前将它放置于阴道，无需带套吃药，无忧避孕，无忧避孕，无忧避孕，无忧避孕，无忧避孕" />
+
+	        <View 
+		        android:layout_width="match_parent"
+		        android:layout_height="0.3dp"
+		        android:layout_marginTop="10dp"
+		        android:background="#CCCCCC"/>
+	    </LinearLayout>
+	</ScrollView>
+	<ImageView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/erweima"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="56dp"
+	    android:layout_marginTop="148dp"/>
+</RelativeLayout>
