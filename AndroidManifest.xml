@@ -91,9 +91,16 @@
             android:label="@string/title_activity_welcome2" >
         </activity>
         <activity
-            android:name=".Info_ffpz1_Activity"
-            android:label="@string/title_activity_info_ffpz1_" >
+            android:name=".Info_ffpz1_Activity" >
         </activity>
+        <activity
+            android:name=".Info_ffpz2_Activity">
+        </activity>
+        <activity
+            android:name=".Info_ffpz3_Activity">
+        </activity>
+        <activity android:name=".Info_ffxs_rg_Activity" ></activity>
+        <activity android:name=".Info_ffxs_zz_Activity" ></activity>
     </application>
 
     <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />

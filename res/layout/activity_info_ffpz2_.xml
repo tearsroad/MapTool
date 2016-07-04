@@ -35,7 +35,7 @@
 	            android:textSize="20sp"
 	            android:layout_marginLeft="4dp"
 	            android:layout_toRightOf="@id/map"
-	            android:text="安全套" />
+	            android:text="返回发放点信息" />
         </RelativeLayout>
         <LinearLayout 
             android:layout_width="wrap_content"
@@ -57,12 +57,12 @@
                 <TextView 
                     style="@style/text_white_style"
                     android:textSize="16dp"
-                    android:text="安全套"/>
+                    android:text="外用避孕药"/>
                 <TextView 
                     style="@style/text_white_style"
                     android:textSize="24dp"
                     android:layout_marginTop="3dp"
-                    android:text="避孕有效率为98%"/>
+                    android:text="避孕有效率为82%"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -81,15 +81,15 @@
 	        android:padding="10dp">
 	        <TextView 
 	            style="@style/text_green_style"
-	            android:text="如何领取？"/>
- 
+	            android:text="它是什么"/>
+
 	        <TextView
 	            style="@style/text_gray_style"
 	            android:layout_width="match_parent"
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="在泉州市所有的免费避孕药具发放点都可领取。" />
+	            android:text="它是杀精剂，使用前将它放置于阴道，无需带套吃药，无忧避孕。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -102,7 +102,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="发放点通常提供中号、光面避孕套。" />
+	            android:text="它有避孕药膜、避孕凝胶、避孕栓等不同品种，正确使用是有效避孕的保障。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -114,7 +114,7 @@
 	        <TextView 
 	            style="@style/text_green_style"
 	            android:layout_marginTop="44dp"
-	            android:text="规格和种类"/>
+	            android:text="怎么领取"/>
 
 	        <TextView
 	            style="@style/text_gray_style"
@@ -122,7 +122,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="国家免费提供，质量有保障，会有不同厂家的产品丰富体验。" />
+	            android:text="这个发放点可以免费领取，但也许需要咨询工作人员。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -135,7 +135,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="如果有大、小号、非光面等需求，请关注“泉州免费避孕药具”咨询领取方式。" />
+	            android:text="想获取更多外用避孕药，关注“泉州免费避孕药具”咨询。" />
 
 	        <View 
 		        android:layout_width="match_parent"

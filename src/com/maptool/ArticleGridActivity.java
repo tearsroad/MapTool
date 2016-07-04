@@ -61,7 +61,7 @@ public class ArticleGridActivity extends Activity implements
 		}else{
 			Intent intent = new Intent(this , ArticleActivity.class);
 			intent.putExtra("url", "http://www.qzmfyj.org/linqu_zs.html");
-			intent.putExtra("title", "线上领取");
+			intent.putExtra("title", "泉州免费避孕药具");
 			intent.putExtra("isNormal", true);
 			startActivity(intent);
 		}

@@ -28,9 +28,11 @@ public class SelectListAdapter extends BaseAdapter {
 	private int parentPositon;
 	private AsyncImageListLoader imageLoader;
 	private Handler handler;
-	public SelectListAdapter(Context context, List<FFMsgItem> items,Handler handler) {
+	private String mTitle;
+	public SelectListAdapter(Context context, List<FFMsgItem> items,Handler handler,String title) {
 		this.context = context;
 		this.items = items;
+		this.mTitle = title;
 		imageLoader = new AsyncImageListLoader(context);
 		this.handler = handler;
 		
@@ -71,7 +73,8 @@ public class SelectListAdapter extends BaseAdapter {
 //				Toast.makeText(context, item.getTitle(), Toast.LENGTH_LONG).show();
 				
 				handler.sendEmptyMessage(1);
-				Intent intent = new Intent(context, item.getClass());
+				Intent intent = new Intent(context, item.getActivity());
+				intent.putExtra("title", mTitle);
 				context.startActivity(intent);
 				
 			}

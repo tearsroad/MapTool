@@ -65,7 +65,7 @@ public class MainSelectPicPopupWindow extends PopupWindow {
 			@Override
 			public void onClick(View v) {
 				mListener.onToClick(mPoiInfo);
-				dismiss();
+//				dismiss();
 			}
 		});
 		

@@ -72,8 +72,10 @@ public class PoiDetailActivity extends Activity {
 		
 		//显示上班时间，如果上午下班时间和下午上班时间一样，则只显示上班时间；
 		//又一个为空值也只显示上班时间，不分上下午
-		String start_time = ToolsUtil.ToDBC(poiInfo.start_time);
-		String end_time = ToolsUtil.ToDBC(poiInfo.end_time);
+		String start_time = ToolsUtil.ToDBC(poiInfo.start_time.trim());
+		String end_time = ToolsUtil.ToDBC(poiInfo.end_time.trim());
+		start_time = start_time.trim();
+		end_time = end_time.trim();
 		if(ToolsUtil.isStrNull(poiInfo.start_time)||ToolsUtil.isStrNull(poiInfo.end_time)){
 			tvEndTime.setVisibility(View.GONE);
 			String time = "";
@@ -148,7 +150,6 @@ public class PoiDetailActivity extends Activity {
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.btn_shangbao:
 //				Toast.makeText(mContext, "isNearby:"+isNearby, Toast.LENGTH_LONG).show();
@@ -158,7 +159,8 @@ public class PoiDetailActivity extends Activity {
 					Toast.makeText(mContext, "抱歉，与该点距离50米内才能上报！", Toast.LENGTH_LONG).show();
 				break;
 			case R.id.rl_ffpz:
-				SelectItemPopupWindow selectItemPopupWindow = new SelectItemPopupWindow(PoiDetailActivity.this, poiInfo.getFfpingzhong());
+				SelectItemPopupWindow selectItemPopupWindow = new SelectItemPopupWindow(PoiDetailActivity.this
+						, poiInfo.getFfpingzhong(),poiInfo.title);
 				selectItemPopupWindow.showAtLocation(findViewById(R.id.layoutAll), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 				selectItemPopupWindow.setOnDismissListener(new OnDismissListener() {
 					@Override
@@ -168,7 +170,8 @@ public class PoiDetailActivity extends Activity {
 				});
 				break;
 			case R.id.rl_fflx:
-				SelectItemPopupWindow selectItemPopupWindow2 = new SelectItemPopupWindow(PoiDetailActivity.this, poiInfo.getFfxingshi());
+				SelectItemPopupWindow selectItemPopupWindow2 = new SelectItemPopupWindow(PoiDetailActivity.this
+						, poiInfo.getFfxingshi(),poiInfo.title);
 				selectItemPopupWindow2.showAtLocation(findViewById(R.id.layoutAll), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 				selectItemPopupWindow2.setOnDismissListener(new OnDismissListener() {
 					@Override

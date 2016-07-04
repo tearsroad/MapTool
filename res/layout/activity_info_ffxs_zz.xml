@@ -35,7 +35,7 @@
 	            android:textSize="20sp"
 	            android:layout_marginLeft="4dp"
 	            android:layout_toRightOf="@id/map"
-	            android:text="安全套" />
+	            android:text="自助发放" />
         </RelativeLayout>
         <LinearLayout 
             android:layout_width="wrap_content"
@@ -57,12 +57,12 @@
                 <TextView 
                     style="@style/text_white_style"
                     android:textSize="16dp"
-                    android:text="安全套"/>
+                    android:text="自助发放点"/>
                 <TextView 
                     style="@style/text_white_style"
                     android:textSize="24dp"
                     android:layout_marginTop="3dp"
-                    android:text="避孕有效率为98%"/>
+                    android:text="使用身份证自行领取"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -81,15 +81,15 @@
 	        android:padding="10dp">
 	        <TextView 
 	            style="@style/text_green_style"
-	            android:text="如何领取？"/>
- 
+	            android:text="它是什么"/>
+
 	        <TextView
 	            style="@style/text_gray_style"
 	            android:layout_width="match_parent"
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="在泉州市所有的免费避孕药具发放点都可领取。" />
+	            android:text="在自助发放点，无须经过工作人员可以自行领取避孕药具。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -102,7 +102,20 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="发放点通常提供中号、光面避孕套。" />
+	            android:text="它有自助发放箱、自助发放机等不同设备。" />
+
+	        <View 
+		        android:layout_width="match_parent"
+		        android:layout_height="0.3dp"
+		        android:layout_marginTop="10dp"
+		        android:background="#CCCCCC"/>
+	        <TextView
+	            style="@style/text_gray_style"
+	            android:layout_width="match_parent"
+	            android:layout_marginTop="24dp"
+	            android:paddingRight="0dp"
+	            android:layout_marginRight="0dp"
+	            android:text="您使用的是是自助发放机，则需要身份证方能领取，请放心，您的身份信息不会被读取。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -110,11 +123,11 @@
 		        android:layout_marginTop="10dp"
 		        android:background="#CCCCCC"/>
 	        
-	        <!-- 怎么领取 -->
+	        <!-- 它的种类 -->
 	        <TextView 
 	            style="@style/text_green_style"
 	            android:layout_marginTop="44dp"
-	            android:text="规格和种类"/>
+	            android:text="它的种类"/>
 
 	        <TextView
 	            style="@style/text_gray_style"
@@ -122,7 +135,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="国家免费提供，质量有保障，会有不同厂家的产品丰富体验。" />
+	            android:text="为了您的安全，自助发放目前以提供“安全套”为主，个别地方提供“外用避孕药”，均不发放口服避孕药。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -135,7 +148,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="如果有大、小号、非光面等需求，请关注“泉州免费避孕药具”咨询领取方式。" />
+	            android:text="自动发放机领取通常为1次1盒，30天领取一次，使用中请参考设备提示。" />
 
 	        <View 
 		        android:layout_width="match_parent"

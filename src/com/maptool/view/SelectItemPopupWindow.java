@@ -29,19 +29,15 @@ public class SelectItemPopupWindow extends PopupWindow {
 	private List<FFMsgItem> mList;
 	private View mView;  
 	private Context mContext;
-	
-	public interface InfoPopupListener{
-		public void onToClick(MyPoiInfo info);
-		public void onStockoutClick(MyPoiInfo info);
-	}
+	private String mTitle;
   
-    public SelectItemPopupWindow(Context context,List<FFMsgItem> mList) {  
+    public SelectItemPopupWindow(Context context,List<FFMsgItem> mList,String title) {  
         super(context);  
         mContext = context;
         LayoutInflater inflater = (LayoutInflater) context  
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
         mView = inflater.inflate(R.layout.popup_item_info, null);
-        
+        this.mTitle = title;
 		this.mList = mList;
 		lvSelects = (ListView) mView.findViewById(R.id.lv_selects);
 		mView.findViewById(R.id.iv_close).setOnClickListener(new OnClickListener() {
@@ -50,7 +46,7 @@ public class SelectItemPopupWindow extends PopupWindow {
 				dismiss();
 			}
 		});
-		SelectListAdapter adapter = new SelectListAdapter(context, mList,handler);
+		SelectListAdapter adapter = new SelectListAdapter(context, mList,handler,this.mTitle);
 		lvSelects.setAdapter(adapter);
         //设置SelectPicPopupWindow的View  
         this.setContentView(mView);  

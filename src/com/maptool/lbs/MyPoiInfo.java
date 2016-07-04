@@ -7,7 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.maptool.Info_ffpz1_Activity;
-import com.maptool.artical.Article;
+import com.maptool.Info_ffpz2_Activity;
+import com.maptool.Info_ffpz3_Activity;
+import com.maptool.Info_ffxs_rg_Activity;
+import com.maptool.Info_ffxs_zz_Activity;
 
 public class MyPoiInfo extends PoiInfo{
 	private static final long serialVersionUID = 1L;
@@ -91,16 +94,16 @@ public class MyPoiInfo extends PoiInfo{
 			article = new FFMsgItem("安全套", Info_ffpz1_Activity.class);
 			break;
 		case '2':
-			article = new FFMsgItem("外用避孕药", Info_ffpz1_Activity.class);
+			article = new FFMsgItem("外用避孕药", Info_ffpz2_Activity.class);
 			break;
 		case '3':
-			article = new FFMsgItem("口服避孕药", Info_ffpz1_Activity.class);
+			article = new FFMsgItem("口服避孕药", Info_ffpz3_Activity.class);
 			break;
 		case '4':
-			article = new FFMsgItem("自取", Info_ffpz1_Activity.class);
+			article = new FFMsgItem("人工", Info_ffxs_rg_Activity.class);
 			break;
 		case '5':
-			article = new FFMsgItem("送货上门", Info_ffpz1_Activity.class);
+			article = new FFMsgItem("自助", Info_ffxs_zz_Activity.class);
 			break;
 		default:
 			break;

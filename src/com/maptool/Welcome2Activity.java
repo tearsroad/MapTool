@@ -21,6 +21,7 @@ public class Welcome2Activity extends Activity {
 	private int totalTime;
 	Timer timer = new Timer(); 
 	Timer timer2 = new Timer(); 
+	private boolean isTime2Schedule = false;
 	private TextView tvMsg;
 	private Button btnSettiog;
 	@Override
@@ -57,7 +58,12 @@ public class Welcome2Activity extends Activity {
 			tvMsg.setText("现在没网络，是否去打开");
 			btnSettiog.setVisibility(View.VISIBLE);
 			pb.setVisibility(View.GONE);
-			timer2.schedule(task2, 0, 500);
+			if(!isTime2Schedule)
+			{
+				isTime2Schedule = true;
+				timer2.schedule(task2, 0, 500);
+			}
+			
 		}else{
 			timer2.cancel();
 			tvMsg.setText("正在定位我的位置");

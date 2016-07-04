@@ -6,16 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
 
-public class Info_ffpz1_Activity extends Activity {
-	
+public class Info_ffxs_zz_Activity extends Activity {
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_info_ffpz1_);
-		
-		((TextView)findViewById(R.id.textView1)).setText(getIntent().getStringExtra("title"));
+		setContentView(R.layout.activity_info_ffxs_zz);
 		findViewById(R.id.rl_back).setOnClickListener(new OnClickListener() {
 			
 			@Override

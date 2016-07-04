@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.maptool.util.ToolsUtil;
+
 public class PoiInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -28,6 +30,11 @@ public class PoiInfo implements Serializable{
 		uid = jo.getInt("uid");
 		geotable_id = jo.getInt("geotable_id");
 		title = jo.getString("title");
+		if(!ToolsUtil.isStrNull(title)){
+			if(!title.endsWith("发放点")){
+				title = title+"发放点";
+			}
+		}
 		address = jo.getString("address");
 		province = jo.getString("province");
 		city = jo.getString("city");

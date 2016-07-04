@@ -19,7 +19,7 @@ public class ToolsUtil {
         return (int) (pxValue / scale + 0.5f);  
     }  
     public static boolean isStrNull(String str){
-    	if(str==null||"".equals(str))
+    	if(str==null||"".equals(str)||" ".equals(str))
     		return true;
     	return false;
     }
