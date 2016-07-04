@@ -31,5 +31,10 @@ public class FFMsgItem {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public FFMsgItem(String title, Class activity) {
+		super();
+		this.title = title;
+		this.activity = activity;
+	}
 	
 }

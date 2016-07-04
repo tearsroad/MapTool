@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.maptool.Info_ffpz1_Activity;
 import com.maptool.artical.Article;
 
 public class MyPoiInfo extends PoiInfo{
@@ -87,19 +88,19 @@ public class MyPoiInfo extends PoiInfo{
 		FFMsgItem article = null;
 		switch (pz) {
 		case '1':
-			article = new FFMsgItem("安全套", "www.baidu.com");
+			article = new FFMsgItem("安全套", Info_ffpz1_Activity.class);
 			break;
 		case '2':
-			article = new FFMsgItem("外用避孕药", "http://www.jianshu.com/");
+			article = new FFMsgItem("外用避孕药", Info_ffpz1_Activity.class);
 			break;
 		case '3':
-			article = new FFMsgItem("口服避孕药", "http://readfree.me/psyche/");
+			article = new FFMsgItem("口服避孕药", Info_ffpz1_Activity.class);
 			break;
 		case '4':
-			article = new FFMsgItem("自取", "http://readfree.me/psyche/");
+			article = new FFMsgItem("自取", Info_ffpz1_Activity.class);
 			break;
 		case '5':
-			article = new FFMsgItem("送货上门", "http://readfree.me/psyche/");
+			article = new FFMsgItem("送货上门", Info_ffpz1_Activity.class);
 			break;
 		default:
 			break;

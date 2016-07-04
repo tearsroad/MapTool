@@ -68,10 +68,10 @@ public class SelectListAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 //				Toast.makeText(context, item.getTitle(), Toast.LENGTH_LONG).show();
+				
 				handler.sendEmptyMessage(1);
-				Intent intent = new Intent(context, Info_ffpz1_Activity.class);
+				Intent intent = new Intent(context, item.getClass());
 				context.startActivity(intent);
 				
 			}
