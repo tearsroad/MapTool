@@ -27,7 +27,7 @@ public class ArticleGridActivity extends Activity implements
 //	private int[] images = new int[] { R.drawable.article_free,
 //			R.drawable.article_secret, R.drawable.article_medicine,
 //			R.drawable.article_cycle, R.drawable.article_necessary };
-	private String[] titles = new String[] { "免费政策","免费品种", "避孕秘籍", "爱之密语", "线上领取" };
+	private String[] titles = new String[] { "免费政策", "避孕秘籍", "爱之密语","生命探索", "线上领取" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

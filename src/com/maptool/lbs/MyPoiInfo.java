@@ -11,6 +11,7 @@ import com.maptool.Info_ffpz2_Activity;
 import com.maptool.Info_ffpz3_Activity;
 import com.maptool.Info_ffxs_rg_Activity;
 import com.maptool.Info_ffxs_zz_Activity;
+import com.maptool.util.ToolsUtil;
 
 public class MyPoiInfo extends PoiInfo{
 	private static final long serialVersionUID = 1L;
@@ -33,13 +34,13 @@ public class MyPoiInfo extends PoiInfo{
 		if(jo == null) return;
 		device_id = getJsonStr(jo, "device_id");
 		device_pos = getJsonStr(jo, "device_pos");
-		start_time = getJsonStr(jo, "start_time");
+		start_time = getTimeByLetter(getJsonStr(jo, "start_time"));
 		contacts = getJsonStr(jo, "contacts");
 		phone = getJsonStr(jo, "phone");
 		device_type = getJsonStr(jo, "device_type");
 		sentinel = getJsonStr(jo, "sentinel");
 		buy_type = getJsonStr(jo, "buy_type");
-		end_time = getJsonStr(jo, "end_time");
+		end_time = getTimeByLetter(getJsonStr(jo, "end_time"));
 		ffxingshi = getJsonStr(jo, "ffxingshi");
 		ffpinzhong = getJsonStr(jo, "ffpinzhong");
 	}
@@ -123,4 +124,18 @@ public class MyPoiInfo extends PoiInfo{
 			msg = msg+"，"+list.get(1).getTitle();
 		return msg;
 	}
+	private String getTimeByLetter(String letter){
+		if(ToolsUtil.isStrNull(letter))
+			return "";
+		if("a".equals(letter)||"A".equals(letter)){
+			return "8:00-12:00";
+		}else if("b".equals(letter)||"B".equals(letter)){
+			return "3:00-5:30";
+		}else if("c".equals(letter)||"C".equals(letter)){
+			return "0:00-24:00";
+		}else{
+			return letter;
+		}
+	}
+
 }
