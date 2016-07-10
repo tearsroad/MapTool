@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.maptool.bean.SBItem;
 import com.maptool.common.L;
 import com.maptool.common.MyError;
+import com.maptool.lbs.AppInfoItem;
 import com.maptool.lbs.MyLBS;
 import com.maptool.lbs.MyLBS.LBSInteractionListener;
 import com.maptool.lbs.MyPoiInfo;
@@ -156,7 +157,7 @@ public class PoiDetailActivity extends Activity {
 				if(isNearby)
 					stockOut();
 				else
-					Toast.makeText(mContext, "抱歉，与该点距离50米内才能上报！", Toast.LENGTH_LONG).show();
+					L.showToast("抱歉，与该点距离50米内才能上报！", Toast.LENGTH_LONG);
 				break;
 			case R.id.rl_ffpz:
 				SelectItemPopupWindow selectItemPopupWindow = new SelectItemPopupWindow(PoiDetailActivity.this
@@ -210,6 +211,12 @@ public class PoiDetailActivity extends Activity {
 		@Override
 		public void onGetStockout(MyError err, List<StockoutPoiInfo> list) {
 			// 这个回调不对外
+		}
+
+		@Override
+		public void onGetAppInfo(MyError err, List<AppInfoItem> list) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	private void stockOut(){

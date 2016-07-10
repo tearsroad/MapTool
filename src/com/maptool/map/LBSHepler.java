@@ -6,6 +6,7 @@ import android.os.Handler;
 
 import com.maptool.common.Const;
 import com.maptool.common.MyError;
+import com.maptool.lbs.AppInfoItem;
 import com.maptool.lbs.MyLBS;
 import com.maptool.lbs.MyLBS.IsStockoutListener;
 import com.maptool.lbs.MyLBS.LBSInteractionListener;
@@ -45,7 +46,7 @@ public class LBSHepler implements LBSInteractionListener {
 		mMyLBS.reportStockout(info,reasonStr, this);
 	}
 	
-	public void getStockout(){
+	public void getStockout2(){
 		mMyLBS.getStockout(this);
 	}
 	
@@ -53,7 +54,9 @@ public class LBSHepler implements LBSInteractionListener {
 			final IsStockoutListener listener){
 		mMyLBS.isStockout(info, listener);
 	}
-
+	public void getAppInfo(){
+		mMyLBS.getAppInfo(this);
+	}
 	@Override
 	public void onGetNearbyGoods(final MyError err, final List<MyPoiInfo> list) {
 		mHandler.post(new Runnable() {
@@ -92,6 +95,17 @@ public class LBSHepler implements LBSInteractionListener {
 			@Override
 			public void run() {
 				mListener.onGetStockout(err, list);
+			}
+		});
+	}
+
+	@Override
+	public void onGetAppInfo(final MyError err,final List<AppInfoItem> list) {
+		// TODO Auto-generated method stub
+		mHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				mListener.onGetAppInfo(err, list);
 			}
 		});
 	}

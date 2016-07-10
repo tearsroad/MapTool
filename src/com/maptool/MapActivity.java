@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -115,7 +117,13 @@ public class MapActivity extends Activity implements View.OnClickListener {
 		timer = null;
 		timer = new Timer();
 		timer.schedule(task, 0, 200);
+		appHandler.sendEmptyMessageDelayed(1, 3000);
 	}
+	Handler appHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			mMapHelper.getAppInfo();
+		};
+	};
 	private void setRadioBtnTextColor(int checkedId){
 		rb500.setTextColor(getResources().getColor(R.color.radio_noselect));
 		rb1000.setTextColor(getResources().getColor(R.color.radio_noselect));
@@ -231,24 +239,28 @@ public class MapActivity extends Activity implements View.OnClickListener {
 	}
 
 	public void onBackPressed() {
-		new AlertDialog.Builder(this).setTitle("确认退出吗？")
-				.setIcon(android.R.drawable.ic_dialog_info)
-				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// 点击“确认”后的操作
-						MapActivity.this.finish();
-
-					}
-				})
-				.setNegativeButton("返回", new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// 点击“返回”后的操作,这里不设置没有任何操作
-					}
-				}).show();
+		final AlertDialog myDialog = new AlertDialog.Builder(this).create(); 
+		myDialog.show(); 
+		myDialog.setCanceledOnTouchOutside(false);
+		myDialog.setCancelable(false);
+        myDialog.getWindow().setContentView(R.layout.quit_alert_layout);  
+        Window window = myDialog.getWindow() ;
+        Button btnLeft = (Button) window.findViewById(R.id.btn_left) ;
+        btnLeft.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                myDialog.dismiss();  
+                System.exit(0);
+            }  
+        }); 
+        window.findViewById(R.id.btn_right)  
+	        .setOnClickListener(new View.OnClickListener() {  
+	        @Override  
+	        public void onClick(View v) {  
+	        	myDialog.dismiss();
+	        }  
+        }); 
 	}
 	TimerTask task = new TimerTask() {    
         @Override    

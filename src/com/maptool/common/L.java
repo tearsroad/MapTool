@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.maptool.view.MyToastC;
+
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -49,7 +51,12 @@ public class L {
 	 */
 	public static void showToast(String msg){
 		L.d(msg);
-		Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+		MyToastC.makeText(context, msg, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+	}
+	public static void showToast(String msg,int duration){
+		L.d(msg);
+		MyToastC.makeText(context, msg, duration).show();
 	}
 	
 	private static Boolean MYLOG_SWITCH=true; // 日志文件总开关  

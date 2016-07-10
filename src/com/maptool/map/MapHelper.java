@@ -8,11 +8,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -51,10 +56,12 @@ import com.maptool.PoiDetailActivity;
 import com.maptool.R;
 import com.maptool.common.L;
 import com.maptool.common.MyError;
+import com.maptool.lbs.AppInfoItem;
 import com.maptool.lbs.MyLBS.LBSInteractionListener;
 import com.maptool.lbs.MyPoiInfo;
 import com.maptool.lbs.StockoutPoiInfo;
 import com.maptool.util.NetworkStateManager;
+import com.maptool.util.ToolsUtil;
 import com.maptool.view.MainSelectPicPopupWindow;
 
 public class MapHelper {
@@ -132,6 +139,7 @@ public class MapHelper {
 		// 初始化定位
 		mBaiduMap.setMyLocationEnabled(true);
 		mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(LocationMode.NORMAL, true, mCurrentMarker));
+		
 		mLocClient = new LocationClient(mActivity);
 		mLocClient.registerLocationListener(new LocationListener());
 		LocationClientOption option = new LocationClientOption();
@@ -241,7 +249,16 @@ public class MapHelper {
 			L.showToast("没有网络连接");
 		}
 	}
-
+	
+	public void getAppInfo(){
+		NetworkStateManager.instance().init(mActivity);
+		if(NetworkStateManager.instance().isNetworkConnected()){
+			mLBSHelper.getAppInfo();;
+		}else{
+//			L.showToast("没有网络连接");
+		}
+	}
+	
 	/**
 	 * 
 	 */
@@ -301,6 +318,23 @@ public class MapHelper {
 		@Override
 		public void onGetStockout(MyError err, List<StockoutPoiInfo> list) {
 			// 这个回调不对外
+		}
+
+		@Override
+		public void onGetAppInfo(MyError err, List<AppInfoItem> list) {
+//			L.showToast("onGetAppInfo！"+list.size()+";err:"+err);
+			if(list!=null&&list.size()>0){
+				for(int i=0;i<list.size();i++){
+					AppInfoItem appinfo = list.get(i);
+					if(ToolsUtil.getPackName(mActivity).equals(appinfo.packageName)
+							&&appinfo.versionCode>ToolsUtil.getAppVersionCode(mActivity)){
+						showAppInfoDialog(appinfo);
+						break;
+					}
+				}
+				
+			}
+			
 		}
 	}
 
@@ -520,6 +554,41 @@ public class MapHelper {
 //		mBaiduMap.showInfoWindow(mInfoWindow);
 		MainSelectPicPopupWindow mainSelectPicPopupWindow = new MainSelectPicPopupWindow(mActivity, info, isNearby, new MyInfoPopupListener());
 		mainSelectPicPopupWindow.showAtLocation(mActivity.findViewById(R.id.layoutAll), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置  
+	}
+	private void showAppInfoDialog(final AppInfoItem item){
+		final AlertDialog myDialog = new AlertDialog.Builder(mActivity).create(); 
+		myDialog.show(); 
+		myDialog.setCanceledOnTouchOutside(false);
+		myDialog.setCancelable(false);
+        myDialog.getWindow().setContentView(R.layout.appinfo_alert_layout);  
+        
+        Window window = myDialog.getWindow() ;
+        Button btnLeft = (Button) window.findViewById(R.id.btn_left) ;
+        btnLeft.setText(item.isForceUpdate?"退出应用":"以后再说");
+        btnLeft.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                myDialog.dismiss();  
+                if(item.isForceUpdate)
+                	System.exit(0);
+            }  
+        }); 
+        window.findViewById(R.id.btn_right)  
+	        .setOnClickListener(new View.OnClickListener() {  
+	        @Override  
+	        public void onClick(View v) {  
+	             
+	             Uri uri = Uri.parse(item.url);          
+	             Intent it = new Intent(Intent.ACTION_VIEW, uri);          
+	             mActivity.startActivity(it);
+	        }  
+        }); 
+        TextView versionName = (TextView) window.findViewById(R.id.tv_versionName) ;
+        TextView history = (TextView) window.findViewById(R.id.tv_history) ;
+        versionName.setText("新版本号："+item.versionName);
+        history.setText(item.history);
+//        history.setText("1.测试；\n2.测试；\n3.测试；\n4.测试；");
+        
 	}
 
 	public void onDestroy() {

@@ -16,6 +16,7 @@ import android.util.Log;
 
 import com.maptool.common.Const;
 import com.maptool.common.ErrorFactory;
+import com.maptool.common.L;
 import com.maptool.common.MyError;
 
 /**
@@ -45,6 +46,8 @@ public class MyLBS extends BaiduLBS {
 		public void onGetStockout(MyError err, List<StockoutPoiInfo> list);
 
 		public void onReportStockout(MyError err);
+		
+		public void onGetAppInfo(MyError err, List<AppInfoItem> list);
 	}
 
 	public MyLBS(int goodsTableId, int stockoutTableId) {
@@ -259,6 +262,57 @@ public class MyLBS extends BaiduLBS {
 				} catch (JSONException e) {
 					listener.onGetIsStockout(
 							ErrorFactory.ErrorJson.setException(e), false);
+				}
+			}
+		}.start();
+	}
+	
+	
+	//new 20160710
+	//app升级模块
+	/**
+	 * 获取版本最新信息
+	 */
+	public void getAppInfo(final LBSInteractionListener listener) {
+		new Thread() {
+			@Override
+			public void run() {
+				JSONObject jo = null;
+				try {
+					jo = json(listData(Const.appinfoTableId, null));
+					if(jo!=null)
+						L.e(jo.toString());
+				} catch (JSONException e) {
+					listener.onGetAppInfo(
+							ErrorFactory.ErrorJson.setException(e), null);
+				}
+				
+				if(jo==null || !jo.has("status")){
+					listener.onGetAppInfo(
+							ErrorFactory.ErrorJson, null);
+					return;
+				}
+
+				try {
+					if (jo.getInt("status") != 0) {
+						listener.onGetAppInfo(
+								ErrorFactory.ErrorNetworkBaiduStatus, null);
+						return;
+					}
+
+					List<AppInfoItem> list = new ArrayList<AppInfoItem>();
+					if(jo.getInt("total") != 0){
+						JSONArray contents = jo.getJSONArray("pois");
+						for (int i = 0, n = contents.length(); i < n; i++) {
+							JSONObject poiItem = contents.getJSONObject(i);
+							AppInfoItem info = new AppInfoItem(poiItem);
+							list.add(info);
+						}
+					}
+					listener.onGetAppInfo(null, list);
+				} catch (JSONException e) {
+					listener.onGetAppInfo(
+							ErrorFactory.ErrorJson.setException(e), null);
 				}
 			}
 		}.start();
