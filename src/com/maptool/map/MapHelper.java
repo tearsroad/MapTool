@@ -98,7 +98,7 @@ public class MapHelper {
 
 	// 图标
 	BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
-            .fromResource(R.drawable.current_position1_2);
+            .fromResource(R.drawable.icon_nil);
 	BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(R.drawable.position1);
 
 	// 弹出框

@@ -31,6 +31,8 @@ import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
@@ -116,7 +118,7 @@ public class MapActivity extends Activity implements View.OnClickListener {
 		timer.cancel();
 		timer = null;
 		timer = new Timer();
-		timer.schedule(task, 0, 200);
+		timer.schedule(task, 0, 700);
 		appHandler.sendEmptyMessageDelayed(1, 3000);
 	}
 	Handler appHandler = new Handler(){
@@ -270,12 +272,33 @@ public class MapActivity extends Activity implements View.OnClickListener {
                 @Override    
                 public void run() {  
                 	if(isIconNormal)
-                		mMapHelper.setMyLocationIcon(R.drawable.current_position1_2,isQuit);
+                		setMark();
+//                		mMapHelper.setMyLocationIcon(R.drawable.current_position1_2,isQuit);
                 	else
-                		mMapHelper.setMyLocationIcon(R.drawable.icon_nil,isQuit);
+                		remove();
+//                		mMapHelper.setMyLocationIcon(R.drawable.icon_nil,isQuit);
                 	isIconNormal = !isIconNormal;
                 }    
             });    
         }    
     };  
+    BitmapDescriptor bdA = BitmapDescriptorFactory
+            .fromResource(R.drawable.tt_position2);
+	
+	Marker mMarkerA;
+    private void setMark(){
+    	if(mMapHelper.getCurPos()!=null){
+	    	MarkerOptions ooA = new MarkerOptions().position(mMapHelper.getCurPos()).icon(bdA)
+	                .zIndex(9).draggable(true);
+	    	mMarkerA = (Marker) (mBaiduMap.addOverlay(ooA));
+    	}
+    	
+    	
+    }
+    private void remove(){
+    	if(mMarkerA!=null&&mMarkerA.isVisible()){
+	    	mMarkerA.remove();
+	        mBaiduMap.hideInfoWindow();
+    	}
+    }
 }
