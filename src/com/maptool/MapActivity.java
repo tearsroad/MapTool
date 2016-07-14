@@ -283,16 +283,16 @@ public class MapActivity extends Activity implements View.OnClickListener {
         }    
     };  
     BitmapDescriptor bdA = BitmapDescriptorFactory
-            .fromResource(R.drawable.tt_position2);
+            .fromResource(R.drawable.current_position1);
 	
 	Marker mMarkerA;
     private void setMark(){
     	if(mMapHelper.getCurPos()!=null){
 	    	MarkerOptions ooA = new MarkerOptions().position(mMapHelper.getCurPos()).icon(bdA)
-	                .zIndex(9).draggable(true);
+	                .zIndex(5).draggable(true);
+	    	ooA.anchor(0.5f, 0.5f);
 	    	mMarkerA = (Marker) (mBaiduMap.addOverlay(ooA));
     	}
-    	
     	
     }
     private void remove(){

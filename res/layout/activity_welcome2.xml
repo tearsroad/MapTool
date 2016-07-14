@@ -35,6 +35,7 @@
 	            android:padding="13dp"
 	            android:textColor="#fff"
 	            android:background="@null"
+	            android:visibility="gone"
 	            android:src="@drawable/more_icon" />
 	
 	        <TextView
@@ -44,7 +45,9 @@
 	            android:layout_toRightOf="@id/button_articles"
 	            android:textColor="@color/white"
 	            android:textSize="18dp"
-	            android:text="附近免费发放点" />
+	            android:paddingLeft="8dp"
+	            android:layout_margin="12dp"
+	            android:text="正在寻找发放点" />
 		</LinearLayout>
         
 

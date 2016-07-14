@@ -37,6 +37,7 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
@@ -44,11 +45,13 @@ import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.overlayutil.OverlayManager;
 import com.baidu.mapapi.overlayutil.WalkingRouteOverlay;
 import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.route.BikingRouteResult;
 import com.baidu.mapapi.search.route.DrivingRouteResult;
 import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
 import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
 import com.baidu.mapapi.search.route.TransitRouteResult;
+import com.baidu.mapapi.search.route.WalkingRouteLine;
 import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.utils.DistanceUtil;
@@ -419,7 +422,8 @@ public class MapHelper {
 				return;
 			}
 			if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-				WalkingRouteOverlay overlay = new WalkingRouteOverlay(mBaiduMap);
+				WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
+//				WalkingRouteOverlay overlay = new WalkingRouteOverlay(mBaiduMap);
 				mRouteOverlay = overlay;
 				// mBaiduMap.setOnMarkerClickListener(overlay);
 				overlay.setData(result.getRouteLines().get(0));
@@ -434,6 +438,12 @@ public class MapHelper {
 
 		@Override
 		public void onGetTransitRouteResult(TransitRouteResult result) {
+		}
+
+		@Override
+		public void onGetBikingRouteResult(BikingRouteResult arg0) {
+			// TODO Auto-generated method stub
+			
 		}
 
 	}
@@ -607,6 +617,35 @@ public class MapHelper {
 	public void onPause() {
 		mMapView.onPause();
 	}
+	private class MyWalkingRouteOverlay extends WalkingRouteOverlay {
+
+        public MyWalkingRouteOverlay(BaiduMap baiduMap) {
+            super(baiduMap);
+        }
+
+        @Override
+        public BitmapDescriptor getStartMarker() {
+//            if (useDefaultIcon) {
+//                return BitmapDescriptorFactory.fromResource(R.drawable.icon_st);
+//            }
+            return null;
+        }
+
+        @Override
+        public BitmapDescriptor getTerminalMarker() {
+//            if (useDefaultIcon) {
+//                return BitmapDescriptorFactory.fromResource(R.drawable.icon_en);
+//            }
+            return null;
+        }
+
+		@Override
+		public int getLineColor() {
+			// TODO Auto-generated method stub
+			return mActivity.getResources().getColor(R.color.map_line_color);
+		}
+
+    }
 }
 
 /*
@@ -628,4 +667,5 @@ final class ZoomUtil {
 	public static int get(String desc) {
 		return descMap.get(desc);
 	}
+	
 }
