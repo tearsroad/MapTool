@@ -141,7 +141,7 @@ public class MapHelper {
 
 		// 初始化定位
 		mBaiduMap.setMyLocationEnabled(true);
-		mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(LocationMode.NORMAL, true, mCurrentMarker));
+		mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(LocationMode.NORMAL, true, mCurrentMarker,0,0));
 		
 		mLocClient = new LocationClient(mActivity);
 		mLocClient.registerLocationListener(new LocationListener());
