@@ -81,7 +81,7 @@
 	        android:padding="10dp">
 	        <TextView 
 	            style="@style/text_green_style"
-	            android:text="如何领取？"/>
+	            android:text="如何领取"/>
  
 	        <TextView
 	            style="@style/text_gray_style"
@@ -89,7 +89,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="在泉州市所有的免费避孕药具发放点都可领取。" />
+	            android:text="在这里，以及泉州市所有的免费避孕药具发放点都可以免费领取。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -102,7 +102,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="发放点通常提供中号、光面避孕套。" />
+	            android:text="国家免费提供，质量有保障，会有不同厂家的产品丰富体验。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -122,7 +122,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="国家免费提供，质量有保障，会有不同厂家的产品丰富体验。" />
+	            android:text="发放点通常提供中号、光面避孕套。" />
 
 	        <View 
 		        android:layout_width="match_parent"

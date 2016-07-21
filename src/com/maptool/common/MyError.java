@@ -30,8 +30,9 @@ public class MyError extends Exception{
 	public String getShowMsg() {
 		return showMsg;
 	}
-	public void setShowMsg(String showMsg) {
+	public MyError setShowMsg(String showMsg) {
 		this.showMsg = showMsg;
+		return this;
 	}
 	
 	public MyError setException(Exception e){

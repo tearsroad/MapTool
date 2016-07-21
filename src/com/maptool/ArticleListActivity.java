@@ -17,9 +17,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maptool.artical.ArticleItem;
 import com.maptool.artical.ArticleType;
+import com.maptool.common.L;
 import com.maptool.util.ArticleUtil;
 import com.maptool.util.ArticleUtil.GetArticleListListener;
 import com.maptool.view.adapter.ArticleListAdapter;
@@ -78,6 +80,13 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 							mylist.add(map);
 						}
 						mHandler.sendEmptyMessage(0);
+					}
+
+					@Override
+					public void onGetArticleErr(String msg) {
+						// TODO Auto-generated method stub
+//						L.setContext(getApplicationContext());
+//						L.showToast(msg, Toast.LENGTH_LONG);
 					}
 				});
 	}

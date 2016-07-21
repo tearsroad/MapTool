@@ -22,6 +22,7 @@ public class ArticleUtil {
 	 */
 	public interface GetArticleListListener {
 		public void onGetArticleList(List<ArticleItem> articleList);
+		public void onGetArticleErr(String msg);
 	}
 
 	/**
@@ -43,6 +44,8 @@ public class ArticleUtil {
 					if (listener != null) {
 						listener.onGetArticleList(articalItems);
 					}
+				}else{
+					listener.onGetArticleErr("获取文章列表失败，请检查网络。");
 				}
 			}
 		}.start();

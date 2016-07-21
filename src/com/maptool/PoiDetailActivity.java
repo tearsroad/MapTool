@@ -157,7 +157,7 @@ public class PoiDetailActivity extends Activity {
 				if(isNearby)
 					stockOut();
 				else
-					L.showToast("抱歉，与该点距离50米内才能上报！", Toast.LENGTH_LONG);
+					L.showToast("报歉，离在这个发放点100米内才能使用这个功能。", Toast.LENGTH_LONG);
 				break;
 			case R.id.rl_ffpz:
 				SelectItemPopupWindow selectItemPopupWindow = new SelectItemPopupWindow(PoiDetailActivity.this
@@ -201,7 +201,7 @@ public class PoiDetailActivity extends Activity {
 		@Override
 		public void onReportStockout(MyError err) {
 			if(err!=null){
-				L.showToast(err.toString());
+				L.showToast(err.getShowMsg());
 				return;
 			}
 			

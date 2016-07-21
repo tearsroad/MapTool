@@ -82,7 +82,7 @@
 	        android:padding="10dp">
 	        <TextView 
 	            style="@style/text_green_style"
-	            android:text="它在哪里"/>
+	            android:text="它是什么"/>
 
 	        <TextView
 	            style="@style/text_gray_style"
@@ -90,7 +90,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="人工发放点通常设在计划生育服务机构和医疗机构内。" />
+	            android:text="这是人工发放点，咨询工作人员就可以免费领取避孕药具。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -103,7 +103,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="人工发放点提供的免费发放产品更丰富，更多样化。" />
+	            android:text="人工发放点通常设在计划生育服务机构和医疗机构内。" />
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -123,7 +123,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="人工发放点可以提供安全套、外用避孕药、口服避孕药等不同避孕产品。" />
+	            android:text="人工发放点可以提供安全套、外用避孕药、口服避孕药等多样化的避孕产品。" />
 
 	        <View 
 		        android:layout_width="match_parent"

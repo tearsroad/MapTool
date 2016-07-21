@@ -3,6 +3,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.SocketTimeoutException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,8 +20,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.conn.ConnectionPoolTimeoutException;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.CoreConnectionPNames;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,6 +42,7 @@ public class BaiduLBS {
 	protected static String ak =  Const.ak;
 	protected static String sk = Const.sk;
 	protected static boolean _debug = true;
+	protected static int timeOut = 16000;
 
 	/**
 	 * @param args
@@ -159,6 +164,7 @@ public class BaiduLBS {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("geotable_id", "" + geotable_id));
 		params.add(new BasicNameValuePair("radius", "" + radius));
+		params.add(new BasicNameValuePair("page_size", ""+50));
 		params.add(new BasicNameValuePair("location", longitude+","+latitude));
 		
 		return _get("http://api.map.baidu.com", "/geosearch/v3/nearby", params);
@@ -229,6 +235,7 @@ public class BaiduLBS {
 	 * @return
 	 */
 	protected static String _get(String site, String baseUrl, List<NameValuePair> params) {
+		String msg = "";
 		params.add(new BasicNameValuePair("ak", ak));
 		String sn = getSn(baseUrl, params);
 		params.add(new BasicNameValuePair("sn", sn));
@@ -239,6 +246,10 @@ public class BaiduLBS {
 
 		HttpGet httpGet = new HttpGet(url);
 		HttpClient httpClient = new DefaultHttpClient();
+		//请求超时
+		httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, timeOut); 
+		//读取超时
+		httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, timeOut);
 		try {
 			HttpResponse response = httpClient.execute(httpGet);
 			if (response.getStatusLine().getStatusCode() == 200) {
@@ -246,15 +257,27 @@ public class BaiduLBS {
 				String jsonStr = readString(in);
 				return jsonStr;
 			}
-		} catch (ClientProtocolException e) {
-			Log.e("mzb",e.getLocalizedMessage());
-		} catch (IOException e) {
-			Log.e("mzb",e.getLocalizedMessage());
+		} catch(ConnectTimeoutException e){
+			e.printStackTrace();
+			msg = "网络连接超时，请检查网络后再试。";
+		}catch(SocketTimeoutException e){
+			e.printStackTrace();
+			msg = "网络连接超时，请检查网络后再试。";
 		}
-		return "";
+		catch (ClientProtocolException e) {
+			e.printStackTrace();
+//			Log.e("mzb",e.getLocalizedMessage());
+			msg = "连接服务器异常，请稍后再试。";
+		} catch (Exception e) {
+//			Log.e("mzb",e.getLocalizedMessage());
+			msg = "连接服务器异常，请稍后再试。";
+			e.printStackTrace();
+		}
+		return msg;
 	}
 
 	protected static String _post(String site, String baseUrl, List<NameValuePair> params) {
+		String msg = "";
 		params.add(new BasicNameValuePair("ak", ak));
 		String sn = getSn(baseUrl, params);
 		params.add(new BasicNameValuePair("sn", sn));
@@ -267,20 +290,32 @@ public class BaiduLBS {
 			httpPost.setEntity(entity);
 
 			HttpClient httpClient = new DefaultHttpClient();
+			//请求超时
+			httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, timeOut); 
+			//读取超时
+			httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, timeOut);
 			HttpResponse response = httpClient.execute(httpPost);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				InputStream in = response.getEntity().getContent();
 				String jsonStr = readString(in);
 				return jsonStr;
 			}
-		} catch (UnsupportedEncodingException e) {
-			L.e(e.getLocalizedMessage());
-		} catch (ClientProtocolException e) {
-			L.e(e.getLocalizedMessage());
-		} catch (IOException e) {
-			L.e(e.getLocalizedMessage());
+		} catch(ConnectTimeoutException e){
+			e.printStackTrace();
+			msg = "网络连接超时，请检查网络后再试。";
+		}catch(SocketTimeoutException e){
+			e.printStackTrace();
+			msg = "网络连接超时，请检查网络后再试。";
+		}catch (ClientProtocolException e) {
+			e.printStackTrace();
+//			Log.e("mzb",e.getLocalizedMessage());
+			msg = "连接服务器异常，请稍后再试。";
+		} catch (Exception e) {
+//			Log.e("mzb",e.getLocalizedMessage());
+			msg = "连接服务器异常，请稍后再试。";
+			e.printStackTrace();
 		}
-		return "";
+		return msg;
 	}
 
 	protected static String getSn(String baseUrl, List<NameValuePair> params) {

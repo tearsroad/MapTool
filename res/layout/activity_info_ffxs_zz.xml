@@ -89,7 +89,9 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="在自助发放点，无须经过工作人员可以自行领取避孕药具。" />
+	            android:text="这是一个自助发放点，您可以自己领取免费避孕药具。" />
+
+	        
 
 	        <View 
 		        android:layout_width="match_parent"
@@ -102,20 +104,7 @@
 	            android:layout_marginTop="24dp"
 	            android:paddingRight="0dp"
 	            android:layout_marginRight="0dp"
-	            android:text="它有自助发放箱、自助发放机等不同设备。" />
-
-	        <View 
-		        android:layout_width="match_parent"
-		        android:layout_height="0.3dp"
-		        android:layout_marginTop="10dp"
-		        android:background="#CCCCCC"/>
-	        <TextView
-	            style="@style/text_gray_style"
-	            android:layout_width="match_parent"
-	            android:layout_marginTop="24dp"
-	            android:paddingRight="0dp"
-	            android:layout_marginRight="0dp"
-	            android:text="您使用的是是自助发放机，则需要身份证方能领取，请放心，您的身份信息不会被读取。" />
+	            android:text="如果使用的是自助发放机，可能需要身份证，身份信息不会被读取，请放心使用。" />
 
 	        <View 
 		        android:layout_width="match_parent"

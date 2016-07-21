@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -95,7 +96,7 @@ public class MapHelper {
 	LBSHepler mLBSHelper;
 	List<MyPoiInfo> mPoiInfoCache; // 获取到周围物品后，缓存到这个列表中，用了判断是否距离用户很近
 	int mSearchRadius = 500; // 搜索范围500,1000,2000
-	int mReachRadius = 50;    // 自动弹出范围，目前是50米
+	int mReachRadius = 100;    // 自动弹出范围，目前是50米
 //	boolean mIsShowNearByWindow = false; // 是否显示了消息框
 //	MyPoiInfo mReachPoiInfo = null;  // 暂存附近机子（用来判断是否离开这个机子了）
 
@@ -276,7 +277,7 @@ public class MapHelper {
 		@Override
 		public void onGetNearbyGoods(MyError err, List<MyPoiInfo> list) {
 			if(err!=null){
-				L.showToast(err.toString());
+				L.showToast(err.getShowMsg(),Toast.LENGTH_LONG);
 				return;
 			}
 			
@@ -284,7 +285,7 @@ public class MapHelper {
 				L.showToast("周围无计生用品");
 				return;
 			}
-			L.showToast("搜索周围计生用品成功，周围有" + list.size() + "个发放点");
+			L.showToast("搜索成功，您周围有" + list.size() + "个免费避孕药具发放点。");
 
 			//把周围的物品缓存起来
 			mPoiInfoCache = list;
@@ -311,11 +312,11 @@ public class MapHelper {
 		@Override
 		public void onReportStockout(MyError err) {
 			if(err!=null){
-				L.showToast(err.toString());
+				L.showToast(err.getShowMsg(),Toast.LENGTH_LONG);
 				return;
 			}
 			
-			L.showToast("缺货上报成功！");
+			L.showToast("缺货上报成功！",Toast.LENGTH_LONG);
 		}
 
 		@Override
@@ -559,11 +560,14 @@ public class MapHelper {
 	 * @param isNearby
 	 */
 	protected void showInfoWindow(LatLng ll,MyPoiInfo info, boolean isNearby){
-//		InfoPopupView infoView = new InfoPopupView(mActivity.getApplicationContext(), info, isNearby, new MyInfoPopupListener());
+//		InfoPopupView infoView = new InfoPopupView(mActivity.getApplicationContext(), 
+//		info, isNearby, new MyInfoPopupListener());
 //		InfoWindow mInfoWindow = new InfoWindow(infoView, ll, -47);
 //		mBaiduMap.showInfoWindow(mInfoWindow);
-		MainSelectPicPopupWindow mainSelectPicPopupWindow = new MainSelectPicPopupWindow(mActivity, info, isNearby, new MyInfoPopupListener());
-		mainSelectPicPopupWindow.showAtLocation(mActivity.findViewById(R.id.layoutAll), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置  
+		MainSelectPicPopupWindow mainSelectPicPopupWindow = new MainSelectPicPopupWindow(mActivity, 
+				info, isNearby, new MyInfoPopupListener());
+		mainSelectPicPopupWindow.showAtLocation(mActivity.findViewById(R.id.layoutAll), 
+				Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置  
 	}
 	private void showAppInfoDialog(final AppInfoItem item){
 		final AlertDialog myDialog = new AlertDialog.Builder(mActivity).create(); 

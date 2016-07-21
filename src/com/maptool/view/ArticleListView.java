@@ -11,10 +11,12 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maptool.ArticleActivity;
 import com.maptool.artical.ArticleItem;
 import com.maptool.artical.ArticleType;
+import com.maptool.common.L;
 import com.maptool.util.ArticleUtil;
 import com.maptool.util.ArticleUtil.GetArticleListListener;
 
@@ -43,6 +45,12 @@ public class ArticleListView extends ListView{
 					}
 				});
 				
+			}
+
+			@Override
+			public void onGetArticleErr(String msg) {
+				// TODO Auto-generated method stub
+				L.showToast(msg, Toast.LENGTH_LONG);
 			}
 		});
 		

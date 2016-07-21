@@ -64,24 +64,26 @@ public class MyLBS extends BaiduLBS {
 			@Override
 			public void run() {
 				JSONObject jo = null;
+				String strmsg = nearbySearch(goodsTableId, radius, longitude,
+						latitude);
 				try {
-					jo = json(nearbySearch(goodsTableId, radius, longitude,
-							latitude));
+					jo = json(strmsg);
 				} catch (JSONException e) {
 					listener.onGetNearbyGoods(
-							ErrorFactory.ErrorJson.setException(e), null);
+							ErrorFactory.ErrorJson.setShowMsg(strmsg), null);
+					return;
 				}
 				
 				if(jo==null || !jo.has("status")){
 					listener.onGetNearbyGoods(
-							ErrorFactory.ErrorJson, null);
+							ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,返回信息为空"), null);
 					return;
 				}
 
 				try {
 					if (jo.getInt("status") != 0) {
 						listener.onGetNearbyGoods(
-								ErrorFactory.ErrorNetworkBaiduStatus, null);
+								ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,status!=0"), null);
 						return;
 					}
 
@@ -95,7 +97,7 @@ public class MyLBS extends BaiduLBS {
 					listener.onGetNearbyGoods(null, list);
 				} catch (JSONException e) {
 					listener.onGetNearbyGoods(
-							ErrorFactory.ErrorJson.setException(e), null);
+							ErrorFactory.ErrorJson.setShowMsg("JSON解析失败！"), null);
 				}
 			}
 		}.start();
@@ -109,23 +111,25 @@ public class MyLBS extends BaiduLBS {
 			@Override
 			public void run() {
 				JSONObject jo = null;
+				String strMst = listData(Const.stockoutTableId, null);
 				try {
-					jo = json(listData(Const.stockoutTableId, null));
+					jo = json(strMst);
 				} catch (JSONException e) {
 					listener.onGetStockout(
-							ErrorFactory.ErrorJson.setException(e), null);
+							ErrorFactory.ErrorJson.setShowMsg(strMst), null);
+					return;
 				}
 				
 				if(jo==null || !jo.has("status")){
 					listener.onGetStockout(
-							ErrorFactory.ErrorJson, null);
+							ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,返回信息为空"), null);
 					return;
 				}
 
 				try {
 					if (jo.getInt("status") != 0) {
 						listener.onGetStockout(
-								ErrorFactory.ErrorNetworkBaiduStatus, null);
+								ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,status!=0"), null);
 						return;
 					}
 
@@ -141,7 +145,7 @@ public class MyLBS extends BaiduLBS {
 					listener.onGetStockout(null, list);
 				} catch (JSONException e) {
 					listener.onGetStockout(
-							ErrorFactory.ErrorJson.setException(e), null);
+							ErrorFactory.ErrorJson.setShowMsg("JSON解析失败！"), null);
 				}
 			}
 		}.start();
@@ -170,25 +174,26 @@ public class MyLBS extends BaiduLBS {
 							if (isStockout == false) {
 								Log.e(TAG, "还未上报");
 								JSONObject jo = null;
+								String strMsg = createData(Const.stockoutTableId,
+										info.title, info.latitude,
+										info.longitude, info.coord_type,
+										params);
 								try {
-									jo = json(createData(Const.stockoutTableId,
-											info.title, info.latitude,
-											info.longitude, info.coord_type,
-											params));
+									jo = json(strMsg);
 								} catch (JSONException e) {
 									listener.onReportStockout(ErrorFactory.ErrorJson
-											.setException(e));
+											.setShowMsg(strMsg));
 								}
 								
 								if(jo==null || !jo.has("status")){
 									listener.onReportStockout(
-											ErrorFactory.ErrorJson);
+											ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,返回信息为空"));
 									return;
 								}
 
 								try {
 									if (jo.getInt("status") != 0) {
-										listener.onReportStockout(ErrorFactory.ErrorNetworkBaiduStatus);
+										listener.onReportStockout(ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,status!=0"));
 										return;
 									}
 									listener.onReportStockout(null);
@@ -226,24 +231,25 @@ public class MyLBS extends BaiduLBS {
 				JSONObject jo = null;
 				Map<String, String> params = new HashMap<String, String>();
 				params.put("goods_id", "" + info.uid);
-
+				String strMsg = listData(Const.stockoutTableId, params);
 				try {
-					jo = json(listData(Const.stockoutTableId, params));
+					jo = json(strMsg);
 				} catch (JSONException e) {
 					listener.onGetIsStockout(
-							ErrorFactory.ErrorJson.setException(e), false);
+							ErrorFactory.ErrorJson.setShowMsg(strMsg), false);
+					return;
 				}
 				
 				if(jo==null || !jo.has("status")){
 					listener.onGetIsStockout(
-							ErrorFactory.ErrorJson, false);
+							ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,返回信息为空"), false);
 					return;
 				}
 
 				try {
 					if (jo.getInt("status") != 0) {
 						listener.onGetIsStockout(
-								ErrorFactory.ErrorNetworkBaiduStatus, false);
+								ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,status!=0"), false);
 						return;
 					}
 					Log.e(TAG,jo.toString());
@@ -261,7 +267,7 @@ public class MyLBS extends BaiduLBS {
 					listener.onGetIsStockout(null, false); // 未上报
 				} catch (JSONException e) {
 					listener.onGetIsStockout(
-							ErrorFactory.ErrorJson.setException(e), false);
+							ErrorFactory.ErrorJson.setShowMsg("JSON解析失败！"), false);
 				}
 			}
 		}.start();
@@ -278,25 +284,26 @@ public class MyLBS extends BaiduLBS {
 			@Override
 			public void run() {
 				JSONObject jo = null;
+				String strMsg = listData(Const.appinfoTableId, null);
 				try {
-					jo = json(listData(Const.appinfoTableId, null));
+					jo = json(strMsg);
 					if(jo!=null)
 						L.e(jo.toString());
 				} catch (JSONException e) {
 					listener.onGetAppInfo(
-							ErrorFactory.ErrorJson.setException(e), null);
+							ErrorFactory.ErrorJson.setShowMsg(strMsg), null);
 				}
 				
 				if(jo==null || !jo.has("status")){
 					listener.onGetAppInfo(
-							ErrorFactory.ErrorJson, null);
+							ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,返回信息为空"), null);
 					return;
 				}
 
 				try {
 					if (jo.getInt("status") != 0) {
 						listener.onGetAppInfo(
-								ErrorFactory.ErrorNetworkBaiduStatus, null);
+								ErrorFactory.ErrorJson.setShowMsg("请求免费发放点出错,status!=0"), null);
 						return;
 					}
 
@@ -312,7 +319,7 @@ public class MyLBS extends BaiduLBS {
 					listener.onGetAppInfo(null, list);
 				} catch (JSONException e) {
 					listener.onGetAppInfo(
-							ErrorFactory.ErrorJson.setException(e), null);
+							ErrorFactory.ErrorJson.setShowMsg("JSON解析失败！"), null);
 				}
 			}
 		}.start();

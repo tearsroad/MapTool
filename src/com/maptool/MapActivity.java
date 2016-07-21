@@ -6,10 +6,8 @@ import java.util.TimerTask;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,7 +21,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -33,15 +30,13 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
-import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.maptool.common.L;
 import com.maptool.map.MapHelper;
 import com.maptool.util.ScreenUtils;
 import com.maptool.util.SystemStatusManager;
+import com.tencent.bugly.crashreport.CrashReport;
 
 public class MapActivity extends Activity implements View.OnClickListener {
 	private static final String PreferenceName = "mapinfo";
@@ -64,9 +59,8 @@ public class MapActivity extends Activity implements View.OnClickListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		// setContentView(R.layout.activity_map);
-
 		L.setContext(this);
-
+//		CrashReport.testJavaCrash();
 		// MapView mapView = (MapView)findViewById(R.id.bmapView);
 		BaiduMapOptions option = new BaiduMapOptions();
 		option.zoomControlsEnabled(false);

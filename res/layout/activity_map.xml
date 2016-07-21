@@ -47,7 +47,7 @@
 	            android:layout_toRightOf="@id/button_articles"
 	            android:textColor="@color/white"
 	            android:textSize="18dp"
-	            android:text="附近免费发放点" />
+	            android:text="附近的免费发放点" />
 		</LinearLayout>
         
 
