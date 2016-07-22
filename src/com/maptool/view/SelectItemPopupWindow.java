@@ -53,16 +53,22 @@ public class SelectItemPopupWindow extends PopupWindow {
         //设置SelectPicPopupWindow弹出窗体的宽  
         this.setWidth(LayoutParams.FILL_PARENT);  
         //设置SelectPicPopupWindow弹出窗体的高  
-        this.setHeight(LayoutParams.WRAP_CONTENT);  
+        this.setHeight(LayoutParams.FILL_PARENT);  
         //设置SelectPicPopupWindow弹出窗体可点击  
-        this.setFocusable(true);  
+//        this.setFocusable(true);  
         //设置SelectPicPopupWindow弹出窗体动画效果  
         this.setAnimationStyle(R.style.PopupAnimation);  
+        
         //实例化一个ColorDrawable颜色为半透明  
         ColorDrawable dw = new ColorDrawable(0x00000000);  
         //设置SelectPicPopupWindow弹出窗体的背景  
-        this.setBackgroundDrawable(dw);  
-        ScreenUtils.backgroundAlpha(mContext,0.5f);
+        this.setBackgroundDrawable(dw); 
+        this.update();
+        this.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        ScreenUtils.backgroundAlpha(mContext,0.4f);
+        this.setOutsideTouchable(false);
+        this.setFocusable(true);
+        this.setTouchable(true);
         //mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框  
         mView.setOnTouchListener(new OnTouchListener() {  
               
@@ -72,19 +78,30 @@ public class SelectItemPopupWindow extends PopupWindow {
                 int y=(int) event.getY();  
                 if(event.getAction()==MotionEvent.ACTION_UP){  
                     if(y<height){  
-                        dismiss();  
+//                        dismiss();  
                     }  
                 }                 
-                return true;  
+                return false;  
             }  
         });  
+        
+        this.setTouchInterceptor(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+					return true;
+				}
+				return false;
+			}
+		});
   
     }  
     private Handler handler = new Handler(){
 
 		@Override
 		public void handleMessage(Message msg) {
-			dismiss();
+//			dismiss();
 			super.handleMessage(msg);
 		}
     	

@@ -73,7 +73,7 @@ public class MainSelectPicPopupWindow extends PopupWindow {
 			@Override
 			public void onClick(View v) {
 				mListener.onStockoutClick(mPoiInfo,isNearby);
-				dismiss();
+//				dismiss();
 			}
 		});
         //设置SelectPicPopupWindow的View  

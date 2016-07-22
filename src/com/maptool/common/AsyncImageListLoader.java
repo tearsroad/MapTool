@@ -70,7 +70,7 @@ public class AsyncImageListLoader {
 				cacheDir.mkdirs();
 			}
 			diskCache = DiskLruCache.open(cacheDir, getAppVersion(context), 1, DISK_CACHE_DEFAULT_SIZE);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -108,7 +108,7 @@ public class AsyncImageListLoader {
 				Bitmap bitmap = BitmapFactory.decodeStream(is);
 				return bitmap;
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -189,7 +189,7 @@ public class AsyncImageListLoader {
 				}
 
 				return bitmap;
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 

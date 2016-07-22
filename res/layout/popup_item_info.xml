@@ -4,27 +4,33 @@
     android:layout_height="match_parent"
     android:id="@+id/pop_layout"
     android:background="#00000000">
-	<RelativeLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:background="@drawable/background_bottom2"
-	    android:layout_marginTop="13dp"
-	    android:paddingTop="10dp"
-	    android:paddingBottom="6dp">
-		<ListView 
-		    android:id="@+id/lv_selects"
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+		<RelativeLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/background_bottom2"
+		    android:layout_marginTop="23dp"
+		    android:paddingTop="10dp"
+		    android:paddingBottom="6dp">
+			<ListView 
+			    android:id="@+id/lv_selects"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_centerInParent="true"
+			    android:cacheColorHint="#00000000"
+			    android:divider="@null"
+			    android:listSelector="@null"></ListView>
+		</RelativeLayout>
+		<ImageView 
+		    android:id="@+id/iv_close"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_centerInParent="true"
-		    android:cacheColorHint="#00000000"
-		    android:divider="@null"
-		    android:listSelector="@null"></ListView>
+		    android:src="@drawable/close_icon"
+		    android:layout_alignParentRight="true"
+		    android:padding="10dp"
+		    android:layout_marginRight="15dp"/>
 	</RelativeLayout>
-	<ImageView 
-	    android:id="@+id/iv_close"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:src="@drawable/close_icon"
-	    android:layout_alignParentRight="true"
-	    android:layout_marginRight="25dp"/>
 </RelativeLayout>
