@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -56,6 +57,7 @@ import com.baidu.mapapi.search.route.WalkingRouteLine;
 import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.maptool.MapActivity;
 import com.maptool.PoiDetailActivity;
 import com.maptool.R;
 import com.maptool.common.L;
@@ -172,7 +174,7 @@ public class MapHelper {
 			@Override
 			public void onMapClick(LatLng arg0) {
 				//点击地图时，隐藏弹出框
-				mBaiduMap.hideInfoWindow();
+//				mBaiduMap.hideInfoWindow();
 			}
 		});
 		
@@ -425,6 +427,9 @@ public class MapHelper {
 			if (result.error == SearchResult.ERRORNO.NO_ERROR) {
 				WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
 //				WalkingRouteOverlay overlay = new WalkingRouteOverlay(mBaiduMap);
+				if(mRouteOverlay!=null){
+					mRouteOverlay.removeFromMap();
+				}
 				mRouteOverlay = overlay;
 				// mBaiduMap.setOnMarkerClickListener(overlay);
 				overlay.setData(result.getRouteLines().get(0));
@@ -448,7 +453,19 @@ public class MapHelper {
 		}
 
 	}
-
+	/**
+	 * 隐藏路线信息
+	 */
+	public void removeRountInfo(){
+		
+		if (mRouteOverlay != null) {
+			mRouteOverlay.removeFromMap();
+		}else{
+			Log.e("removeRountInfo", "mRouteOverlay is null");
+		}
+//		mBaiduMap.clear();
+		mBaiduMap.hideInfoWindow();
+	}
 	/**
 	 * 标记点击回调类
 	 * 
@@ -457,9 +474,8 @@ public class MapHelper {
 	protected class MarkerClickListener implements OnMarkerClickListener {
 		@Override
 		public boolean onMarkerClick(Marker marker) {
-			if (mRouteOverlay != null) {
-				mRouteOverlay.removeFromMap();
-			}
+			//隐藏路线信息
+			removeRountInfo();
 
 			// 判断是否是我们自定义的图标
 			// 点击有两种情况：1.点击的是远距离的目标，那么现实的对话框中的按钮是“到这去”
@@ -484,7 +500,7 @@ public class MapHelper {
 	/**
 	 * 位置弹出信息框事件回调类
 	 */
-	protected class MyInfoPopupListener implements MainSelectPicPopupWindow.InfoPopupListener {
+	public class MyInfoPopupListener implements MainSelectPicPopupWindow.InfoPopupListener {
 		@Override
 		public void onToClick(MyPoiInfo info) {
 			mBaiduMap.hideInfoWindow();
@@ -498,27 +514,7 @@ public class MapHelper {
 		@Override
 		public void onStockoutClick(MyPoiInfo info,boolean isNearby) {
 			//缺货上报，先判断是否已经上报
-//			mLBSHelper.isisStockout(info, new MyLBS.IsStockoutListener() {
-//				@Override
-//				public void onGetIsStockout(MyError err, final boolean isStockout) {
-//					if(err==null){
-//						mHandler.post(new Runnable() {
-//							@Override
-//							public void run() {
-//								if(isStockout){
-//									L.showToast("该地点已经上报");
-//								}else{
-//									showStockoutDialog(info);
-//								}
-//							}
-//						});
-//					}
-//				}
-//			});
-//			
-//			
-//			//mLBSHelper.reportStockout(info);
-//			mBaiduMap.hideInfoWindow();
+
 			Intent intent = new Intent(mActivity,PoiDetailActivity.class);
 			intent.putExtra("position", info);
 			intent.putExtra("isNearby", isNearby);
@@ -560,14 +556,11 @@ public class MapHelper {
 	 * @param isNearby
 	 */
 	protected void showInfoWindow(LatLng ll,MyPoiInfo info, boolean isNearby){
-//		InfoPopupView infoView = new InfoPopupView(mActivity.getApplicationContext(), 
-//		info, isNearby, new MyInfoPopupListener());
-//		InfoWindow mInfoWindow = new InfoWindow(infoView, ll, -47);
-//		mBaiduMap.showInfoWindow(mInfoWindow);
-		MainSelectPicPopupWindow mainSelectPicPopupWindow = new MainSelectPicPopupWindow(mActivity, 
-				info, isNearby, new MyInfoPopupListener());
-		mainSelectPicPopupWindow.showAtLocation(mActivity.findViewById(R.id.layoutAll), 
-				Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置  
+		((MapActivity)mActivity).showButtomRl(info, isNearby, new MyInfoPopupListener());;
+//		MainSelectPicPopupWindow mainSelectPicPopupWindow = new MainSelectPicPopupWindow(mActivity, 
+//				info, isNearby, new MyInfoPopupListener());
+//		mainSelectPicPopupWindow.showAtLocation(mActivity.findViewById(R.id.layoutAll), 
+//				Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置  
 	}
 	private void showAppInfoDialog(final AppInfoItem item){
 		final AlertDialog myDialog = new AlertDialog.Builder(mActivity).create(); 

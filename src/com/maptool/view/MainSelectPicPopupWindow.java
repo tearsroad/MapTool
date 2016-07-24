@@ -83,7 +83,8 @@ public class MainSelectPicPopupWindow extends PopupWindow {
         //设置SelectPicPopupWindow弹出窗体的高  
         this.setHeight(LayoutParams.WRAP_CONTENT);  
         //设置SelectPicPopupWindow弹出窗体可点击  
-        this.setFocusable(true);  
+        this.setFocusable(false);
+        this.setOutsideTouchable(true);
         //设置SelectPicPopupWindow弹出窗体动画效果  
         this.setAnimationStyle(R.style.PopupAnimation);  
         //实例化一个ColorDrawable颜色为半透明  
@@ -91,20 +92,20 @@ public class MainSelectPicPopupWindow extends PopupWindow {
         //设置SelectPicPopupWindow弹出窗体的背景  
         this.setBackgroundDrawable(dw);  
         //mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框  
-        mView.setOnTouchListener(new OnTouchListener() {  
-              
-            public boolean onTouch(View v, MotionEvent event) {  
-                  
-                int height = mView.findViewById(R.id.pop_layout).getTop();  
-                int y=(int) event.getY();  
-                if(event.getAction()==MotionEvent.ACTION_UP){  
-                    if(y<height){  
-                        dismiss();  
-                    }  
-                }                 
-                return true;  
-            }  
-        });  
+//        mView.setOnTouchListener(new OnTouchListener() {  
+//              
+//            public boolean onTouch(View v, MotionEvent event) {  
+//                  
+//                int height = mView.findViewById(R.id.pop_layout).getTop();  
+//                int y=(int) event.getY();  
+//                if(event.getAction()==MotionEvent.ACTION_UP){  
+//                    if(y<height){  
+//                        dismiss();  
+//                    }  
+//                }                 
+//                return true;  
+//            }  
+//        });  
   
     }  
 }

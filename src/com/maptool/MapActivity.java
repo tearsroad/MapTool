@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,7 +22,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMapOptions;
@@ -33,9 +36,12 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.maptool.common.L;
+import com.maptool.lbs.MyPoiInfo;
 import com.maptool.map.MapHelper;
+import com.maptool.map.MapHelper.MyInfoPopupListener;
 import com.maptool.util.ScreenUtils;
 import com.maptool.util.SystemStatusManager;
+import com.maptool.view.MainSelectPicPopupWindow.InfoPopupListener;
 import com.tencent.bugly.crashreport.CrashReport;
 
 public class MapActivity extends Activity implements View.OnClickListener {
@@ -52,6 +58,7 @@ public class MapActivity extends Activity implements View.OnClickListener {
 	Timer timer = new Timer(); 
 	private boolean isIconNormal=false;
 	private boolean isQuit = false;
+	private RelativeLayout pop_layout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,7 +92,7 @@ public class MapActivity extends Activity implements View.OnClickListener {
 
 		btnChangeMapType = (Button) findViewById(R.id.button_changeMapType);
 		btnChangeMapType.setOnClickListener(this);
-
+		pop_layout = (RelativeLayout) findViewById(R.id.pop_layout);
 		rb500 = (RadioButton) findViewById(R.id.rb_500);
 		rb1000 = (RadioButton) findViewById(R.id.rb_1000);
 		rb2000 = (RadioButton) findViewById(R.id.rb_2000);
@@ -235,28 +242,31 @@ public class MapActivity extends Activity implements View.OnClickListener {
 	}
 
 	public void onBackPressed() {
-
-		final AlertDialog myDialog = new AlertDialog.Builder(this).create(); 
-		myDialog.show(); 
-		myDialog.setCanceledOnTouchOutside(false);
-		myDialog.setCancelable(false);
-        myDialog.getWindow().setContentView(R.layout.quit_alert_layout);  
-        Window window = myDialog.getWindow() ;
-        Button btnLeft = (Button) window.findViewById(R.id.btn_left) ;
-        btnLeft.setOnClickListener(new View.OnClickListener() {  
-            @Override  
-            public void onClick(View v) {  
-                myDialog.dismiss();  
-                System.exit(0);
-            }  
-        }); 
-        window.findViewById(R.id.btn_right)  
-	        .setOnClickListener(new View.OnClickListener() {  
-	        @Override  
-	        public void onClick(View v) {  
-	        	myDialog.dismiss();
-	        }  
-        }); 
+		if(pop_layout.getVisibility()==View.VISIBLE){
+			closeButtomRl();
+		}else{
+			final AlertDialog myDialog = new AlertDialog.Builder(this).create(); 
+			myDialog.show(); 
+			myDialog.setCanceledOnTouchOutside(false);
+			myDialog.setCancelable(false);
+	        myDialog.getWindow().setContentView(R.layout.quit_alert_layout);  
+	        Window window = myDialog.getWindow() ;
+	        Button btnLeft = (Button) window.findViewById(R.id.btn_left) ;
+	        btnLeft.setOnClickListener(new View.OnClickListener() {  
+	            @Override  
+	            public void onClick(View v) {  
+	                myDialog.dismiss();  
+	                System.exit(0);
+	            }  
+	        }); 
+	        window.findViewById(R.id.btn_right)  
+		        .setOnClickListener(new View.OnClickListener() {  
+		        @Override  
+		        public void onClick(View v) {  
+		        	myDialog.dismiss();
+		        }  
+	        }); 
+		}
 	}
 	TimerTask task = new TimerTask() {    
         @Override    
@@ -294,5 +304,60 @@ public class MapActivity extends Activity implements View.OnClickListener {
 	    	mMarkerA.remove();
 	        mBaiduMap.hideInfoWindow();
     	}
+    }
+    
+    //底部弹出的地图点操作，到这去，详情
+    TextView tvDevicePos;
+	TextView tvAddredd;
+	Button btnTo;
+	Button btnStockout;
+	
+	InfoPopupListener mListener;
+	MyPoiInfo mPoiInfo;
+    public void showButtomRl(MyPoiInfo info,final boolean isNearby,MyInfoPopupListener listener){
+    	pop_layout.setVisibility(View.VISIBLE);
+    	mListener = listener;
+		mPoiInfo = info;
+		
+		tvDevicePos = (TextView)findViewById(R.id.textView_machinePos);
+		tvAddredd = (TextView)findViewById(R.id.textView_address);
+		btnTo = (Button)findViewById(R.id.button_to);
+		btnStockout = (Button)findViewById(R.id.button_stockoout);
+		findViewById(R.id.iv_close).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				closeButtomRl();
+			}
+		});
+		// 显示数据
+		tvDevicePos.setText(mPoiInfo.title);
+		String ffxingshi = mPoiInfo.getFfxingshiMsg();
+		if(ffxingshi==null)
+			tvAddredd.setText("");
+		else
+			tvAddredd.setText("（"+ffxingshi+"）");
+		
+		btnTo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onToClick(mPoiInfo);
+			}
+		});
+		
+		btnStockout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListener.onStockoutClick(mPoiInfo,isNearby);
+			}
+		});
+    }
+    /**
+     * 隐藏底部弹窗，路线与弹窗同屏；
+     * 一直显示存在，回退或者点击关闭按钮才能关闭
+     */
+    public void closeButtomRl(){
+    	mMapHelper.removeRountInfo();
+    	pop_layout.setVisibility(View.GONE);
     }
 }
