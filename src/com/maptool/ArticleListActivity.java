@@ -31,10 +31,13 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 	private ListView mListView;
 	private ImageView mBackButton;
 	private ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
-	private List<ArticleItem> mArticleItems;
+	private List<ArticleItem> mArticleItems=new ArrayList<ArticleItem>();
 	private String title;
 	private TextView tvTitle;
-
+	private int total = 0;
+	private int currentNum = 0;
+	private int currentPage = 1;
+	private ArticleListAdapter adapter;
 	private Handler mHandler = new Handler(){
 		public void handleMessage(Message msg) {
 			initUI();
@@ -49,7 +52,10 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 		mListView = (ListView) findViewById(R.id.listview);
 		tvTitle = (TextView) findViewById(R.id.textView1);
 		mListView.setOnItemClickListener(this);
-		initData();
+		adapter = new ArticleListAdapter(this, mArticleItems);
+		// 添加并且显示
+		mListView.setAdapter(adapter);
+		initData(currentPage);
 		title = getIntent().getStringExtra("title");
 		tvTitle.setText(title);
 		mBackButton = (ImageView) findViewById(R.id.map);
@@ -64,29 +70,32 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 		});
 	}
 
-	private void initData() {
+	private void initData(int page) {
 		Intent intent = getIntent();
 		int type = intent.getIntExtra("type", 0);
-		ArticleUtil.getArticleList(ArticleType.values()[type],
+		ArticleUtil.getArticleList(ArticleType.values()[type],page,
 				new GetArticleListListener() {
 
 					@Override
-					public void onGetArticleList(List<ArticleItem> articleList) {
-						// TODO Auto-generated method stub
-						mArticleItems = articleList;
+					public void onGetArticleList(List<ArticleItem> articleList,int total2) {
+						
+						mArticleItems.addAll(articleList);
 						for (ArticleItem articleItem : articleList) {
 							HashMap<String, String> map = new HashMap<String, String>();
 							map.put("title", articleItem.getTitle());
 							mylist.add(map);
 						}
-						mHandler.sendEmptyMessage(0);
+						total = total2;
+						currentNum +=articleList.size();
+						if(mHandler!=null)
+							mHandler.sendEmptyMessage(0);
 					}
 
 					@Override
 					public void onGetArticleErr(String msg) {
-						// TODO Auto-generated method stub
 //						L.setContext(getApplicationContext());
 //						L.showToast(msg, Toast.LENGTH_LONG);
+						currentPage--;
 					}
 				});
 	}
@@ -102,9 +111,12 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 //
 //				// ListItem的XML文件里面的两个TextView ID
 //				new int[] { R.id.title });
-		ArticleListAdapter adapter = new ArticleListAdapter(this, mArticleItems);
-		// 添加并且显示
-		mListView.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+//		Toast.makeText(this, "total:"+total, Toast.LENGTH_LONG).show();
+		if(currentNum<total){
+			currentPage++;
+			initData(currentPage);
+		}
 	}
 
 	@Override
@@ -117,5 +129,10 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 			intent.putExtra("title", article.getTitle());
 			startActivity(intent);
 		}
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		mHandler = null;
 	}
 }

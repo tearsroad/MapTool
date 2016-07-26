@@ -2,6 +2,10 @@ package com.maptool.util;
 
 import java.util.List;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import android.util.Log;
 
 import com.maptool.artical.Article;
@@ -21,7 +25,7 @@ public class ArticleUtil {
 	 * 获取文章列表回调接口
 	 */
 	public interface GetArticleListListener {
-		public void onGetArticleList(List<ArticleItem> articleList);
+		public void onGetArticleList(List<ArticleItem> articleList,int total);
 		public void onGetArticleErr(String msg);
 	}
 
@@ -31,18 +35,26 @@ public class ArticleUtil {
 	 * @param type
 	 * @return
 	 */
-	public static void getArticleList(final ArticleType type,
+	public static void getArticleList(final ArticleType type,final int page,
 			final GetArticleListListener listener) {
 		new Thread() {
 			@Override
 			public void run() {
-				String url = type.getUrl(1); // TODO 目前就获取第一页的
+				String url = type.getUrl(1)+"?page="+page; // TODO 目前就获取第一页的
 				String content = HttpUtil.httpGet(url);
 				if(content!=null){
 					List<ArticleItem> articalItems = BlogUtil.getBlogItemList(1,
 							content);
+					Document doc = Jsoup.parse(content);
+					Element te = doc.getElementsByClass("meta").get(0);
+					String ts = te.select("a").get(0).text();
+					String[] tss = ts.split(" ");
+					int total = -1;
+					if(tss!=null){
+						total = Integer.valueOf(tss[0]);
+					}
 					if (listener != null) {
-						listener.onGetArticleList(articalItems);
+						listener.onGetArticleList(articalItems,total);
 					}
 				}else{
 					listener.onGetArticleErr("获取文章列表失败，请检查网络。");
@@ -68,7 +80,7 @@ public class ArticleUtil {
 				if (content != null) {
 					Article article = BlogUtil.getArtcle(content);
 					if (listener != null) {
-						L.writeLogtoFile(article.getContent());
+//						L.writeLogtoFile(article.getContent());
 						listener.onGetArticle(article);
 					}
 				}

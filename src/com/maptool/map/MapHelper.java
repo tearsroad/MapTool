@@ -448,7 +448,6 @@ public class MapHelper {
 
 		@Override
 		public void onGetBikingRouteResult(BikingRouteResult arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
