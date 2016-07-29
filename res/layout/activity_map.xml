@@ -31,7 +31,7 @@
 		    android:gravity="center_vertical">
 		    
 		    <ImageButton
-	            android:id="@+id/button_articles"
+	            android:id="@+id/bt"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
@@ -47,7 +47,7 @@
 	            android:id="@+id/textView1"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_toRightOf="@id/button_articles"
+	            android:layout_toRightOf="@id/bt"
 	            android:textColor="@color/white"
 	            android:textSize="18dp"
 	            android:text="附近的免费发放点" />
@@ -116,6 +116,16 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/normal_map1"
+        android:visibility="visible" />
+    <Button
+        android:id="@+id/button_articles"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/btn_xuanjiao"
         android:visibility="visible" />
 
     <ImageView

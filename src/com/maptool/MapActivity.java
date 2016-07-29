@@ -52,7 +52,7 @@ public class MapActivity extends Activity implements View.OnClickListener {
 	RadioGroup rgRadius;
 	RadioButton rb500, rb1000, rb2000;
 	// Button btnRefresh;
-	ImageButton btnArticles;
+	Button btnArticles;
 	private UiSettings mUiSettings;
 	BaiduMap mBaiduMap;
 	Timer timer = new Timer(); 
@@ -114,7 +114,7 @@ public class MapActivity extends Activity implements View.OnClickListener {
 		// btnRefresh = (Button) findViewById(R.id.btn_refresh);
 		// btnRefresh.setOnClickListener(this);
 
-		btnArticles = (ImageButton) findViewById(R.id.button_articles);
+		btnArticles = (Button) findViewById(R.id.button_articles);
 		btnArticles.setOnClickListener(this);
 		timer.cancel();
 		timer = null;
