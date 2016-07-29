@@ -6,7 +6,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import android.app.Application;
 
 public class MapToolApplication extends Application {
-
+	public static boolean isAppUpdateInfoShow = false;
 	@Override
 	public void onCreate() {
 		super.onCreate();

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.maptool.artical.Article;
 import com.maptool.util.ArticleUtil;
 import com.maptool.util.ArticleUtil.GetArticleListener;
+import com.maptool.util.ScreenUtils;
 import com.maptool.view.ProgressWebView;
 
 public class ArticleActivity extends Activity {
@@ -35,21 +36,26 @@ public class ArticleActivity extends Activity {
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		wvContent = (ProgressWebView) findViewById(R.id.webView_content);
 
-//		wvContent.setWebChromeClient(new WebChromeClient());
-//		wvContent.getSettings().setLayoutAlgorithm(
-//				LayoutAlgorithm.SINGLE_COLUMN);
+		wvContent.setWebChromeClient(new WebChromeClient());
+		wvContent.getSettings().setLayoutAlgorithm(
+				LayoutAlgorithm.SINGLE_COLUMN);
 //		wvContent.getSettings().setLoadWithOverviewMode(true);
 //		wvContent.getSettings().setJavaScriptEnabled(true); 
 		
-//		wvContent.getSettings().setUseWideViewPort(true);
-//		wvContent.getSettings().setLoadWithOverviewMode(true);
+		wvContent.getSettings().setUseWideViewPort(true);
+		wvContent.getSettings().setLoadWithOverviewMode(true);
 		wvContent.getSettings().setJavaScriptEnabled(true);
+		wvContent.getSettings().setSupportZoom(true);
+		wvContent.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+		wvContent.scrollTo(0, ScreenUtils.getScreenHeight(this));
+		wvContent.requestFocus();
 //		wvContent.loadUrl("http://mp.weixin.qq.com/s?__biz=MzI4MzAyNDU4NA==&mid=2650939198&idx=1&sn=fe6bcf4103a564ad327a75ada57a123f&scene=0");
 		Intent intent = getIntent();
 		String url = intent.getStringExtra("url");
 		Log.i(TAG, "url:"+url);
 		tvTitle.setText(intent.getStringExtra("title"));
 		isNormal = intent.getBooleanExtra("isNormal", false);
+//		wvContent.loadUrl("http://www.jianshu.com/notebooks/1327164/latest");
 		if(isNormal){
 			wvContent.loadUrl(url);
 		}else{

@@ -58,6 +58,7 @@ import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.maptool.MapActivity;
+import com.maptool.MapToolApplication;
 import com.maptool.PoiDetailActivity;
 import com.maptool.R;
 import com.maptool.common.L;
@@ -334,7 +335,11 @@ public class MapHelper {
 					AppInfoItem appinfo = list.get(i);
 					if(ToolsUtil.getPackName(mActivity).equals(appinfo.packageName)
 							&&appinfo.versionCode>ToolsUtil.getAppVersionCode(mActivity)){
-						showAppInfoDialog(appinfo);
+						if(!MapToolApplication.isAppUpdateInfoShow){
+							MapToolApplication.isAppUpdateInfoShow = true;
+							showAppInfoDialog(appinfo);
+						}
+						
 						break;
 					}
 				}

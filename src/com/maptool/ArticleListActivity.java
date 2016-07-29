@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,19 +16,16 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maptool.artical.ArticleItem;
 import com.maptool.artical.ArticleType;
-import com.maptool.common.L;
 import com.maptool.util.ArticleUtil;
 import com.maptool.util.ArticleUtil.GetArticleListListener;
 import com.maptool.view.adapter.ArticleListAdapter;
 
 public class ArticleListActivity extends Activity implements OnItemClickListener{
-
+	private Context context = this;
 	private ListView mListView;
 	private ImageView mBackButton;
 	private ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
@@ -77,18 +75,34 @@ public class ArticleListActivity extends Activity implements OnItemClickListener
 				new GetArticleListListener() {
 
 					@Override
-					public void onGetArticleList(List<ArticleItem> articleList,int total2) {
+					public void onGetArticleList(final List<ArticleItem> articleList,final int total2) {
 						
-						mArticleItems.addAll(articleList);
-						for (ArticleItem articleItem : articleList) {
-							HashMap<String, String> map = new HashMap<String, String>();
-							map.put("title", articleItem.getTitle());
-							mylist.add(map);
-						}
-						total = total2;
-						currentNum +=articleList.size();
-						if(mHandler!=null)
-							mHandler.sendEmptyMessage(0);
+						if(mHandler==null)return;
+//						mArticleItems.addAll(articleList);
+//						for (ArticleItem articleItem : articleList) {
+//							HashMap<String, String> map = new HashMap<String, String>();
+//							map.put("title", articleItem.getTitle());
+//							mylist.add(map);
+//						}
+//						total = total2;
+//						currentNum +=articleList.size();
+//						if(mHandler!=null)
+//							mHandler.sendEmptyMessage(0);
+						(ArticleListActivity.this).runOnUiThread(new Runnable() {
+				            @Override
+				            public void run() {
+				                //已在主线程中，可以更新UI
+				            	mArticleItems.addAll(articleList);
+								for (ArticleItem articleItem : articleList) {
+									HashMap<String, String> map = new HashMap<String, String>();
+									map.put("title", articleItem.getTitle());
+									mylist.add(map);
+								}
+								total = total2;
+								currentNum +=articleList.size();
+								initUI();
+				            }
+				        });
 					}
 
 					@Override
