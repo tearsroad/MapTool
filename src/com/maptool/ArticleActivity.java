@@ -36,18 +36,18 @@ public class ArticleActivity extends Activity {
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		wvContent = (ProgressWebView) findViewById(R.id.webView_content);
 
-		wvContent.setWebChromeClient(new WebChromeClient());
-		wvContent.getSettings().setLayoutAlgorithm(
-				LayoutAlgorithm.SINGLE_COLUMN);
+//		wvContent.setWebChromeClient(new WebChromeClient());
+//		wvContent.getSettings().setLayoutAlgorithm(
+//				LayoutAlgorithm.SINGLE_COLUMN);
 //		wvContent.getSettings().setLoadWithOverviewMode(true);
 //		wvContent.getSettings().setJavaScriptEnabled(true); 
-		
+		wvContent.getSettings().setBuiltInZoomControls(true);//设置使支持缩放
 		wvContent.getSettings().setUseWideViewPort(true);
-		wvContent.getSettings().setLoadWithOverviewMode(true);
+//		wvContent.getSettings().setLoadWithOverviewMode(true);
 		wvContent.getSettings().setJavaScriptEnabled(true);
-		wvContent.getSettings().setSupportZoom(true);
-		wvContent.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-		wvContent.scrollTo(0, ScreenUtils.getScreenHeight(this));
+//		wvContent.getSettings().setSupportZoom(true);
+//		wvContent.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+//		wvContent.scrollTo(0, ScreenUtils.getScreenHeight(this));
 		wvContent.requestFocus();
 //		wvContent.loadUrl("http://mp.weixin.qq.com/s?__biz=MzI4MzAyNDU4NA==&mid=2650939198&idx=1&sn=fe6bcf4103a564ad327a75ada57a123f&scene=0");
 		Intent intent = getIntent();
