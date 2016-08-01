@@ -120,7 +120,7 @@ public class MapActivity extends Activity implements View.OnClickListener {
 		timer = null;
 		timer = new Timer();
 		timer.schedule(task, 0, 700);
-		appHandler.sendEmptyMessageDelayed(1, 3000);
+		appHandler.sendEmptyMessageDelayed(1, 500);
 	}
 	Handler appHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {

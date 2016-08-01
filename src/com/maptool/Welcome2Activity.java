@@ -31,6 +31,7 @@ public class Welcome2Activity extends Activity {
 		tvMsg = (TextView) findViewById(R.id.tv_buttom_msg);
 		btnSettiog = (Button) findViewById(R.id.btn_opensetting);
 		pb = (ProgressBar) findViewById(R.id.progressBar1);
+		MapToolApplication.isAppUpdateInfoShow = true;
 		btnSettiog.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

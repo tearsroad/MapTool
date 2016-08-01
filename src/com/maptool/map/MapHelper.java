@@ -335,8 +335,8 @@ public class MapHelper {
 					AppInfoItem appinfo = list.get(i);
 					if(ToolsUtil.getPackName(mActivity).equals(appinfo.packageName)
 							&&appinfo.versionCode>ToolsUtil.getAppVersionCode(mActivity)){
-						if(!MapToolApplication.isAppUpdateInfoShow){
-							MapToolApplication.isAppUpdateInfoShow = true;
+						if(MapToolApplication.isAppUpdateInfoShow){
+							MapToolApplication.isAppUpdateInfoShow = false;
 							showAppInfoDialog(appinfo);
 						}
 						
@@ -587,8 +587,7 @@ public class MapHelper {
         window.findViewById(R.id.btn_right)  
 	        .setOnClickListener(new View.OnClickListener() {  
 	        @Override  
-	        public void onClick(View v) {  
-	             
+	        public void onClick(View v) {
 	             Uri uri = Uri.parse(item.url);          
 	             Intent it = new Intent(Intent.ACTION_VIEW, uri);          
 	             mActivity.startActivity(it);
