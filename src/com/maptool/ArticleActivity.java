@@ -41,7 +41,7 @@ public class ArticleActivity extends Activity {
 //				LayoutAlgorithm.SINGLE_COLUMN);
 //		wvContent.getSettings().setLoadWithOverviewMode(true);
 //		wvContent.getSettings().setJavaScriptEnabled(true); 
-		wvContent.getSettings().setBuiltInZoomControls(true);//设置使支持缩放
+//		wvContent.getSettings().setBuiltInZoomControls(true);//设置使支持缩放
 		wvContent.getSettings().setUseWideViewPort(true);
 //		wvContent.getSettings().setLoadWithOverviewMode(true);
 		wvContent.getSettings().setJavaScriptEnabled(true);

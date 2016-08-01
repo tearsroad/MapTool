@@ -6,6 +6,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -588,9 +589,14 @@ public class MapHelper {
 	        .setOnClickListener(new View.OnClickListener() {  
 	        @Override  
 	        public void onClick(View v) {
-	             Uri uri = Uri.parse(item.url);          
-	             Intent it = new Intent(Intent.ACTION_VIEW, uri);          
-	             mActivity.startActivity(it);
+	        	try {
+	        		Uri uri = Uri.parse(item.url);          
+		            Intent it = new Intent(Intent.ACTION_VIEW, uri);          
+		            mActivity.startActivity(it);
+	        	} catch (ActivityNotFoundException e) {
+	        	    e.printStackTrace();
+	        	}
+	             
 	        }  
         }); 
         TextView versionName = (TextView) window.findViewById(R.id.tv_versionName) ;
