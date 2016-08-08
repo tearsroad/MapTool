@@ -42,7 +42,7 @@ public class BaiduLBS {
 	protected static String ak =  Const.ak;
 	protected static String sk = Const.sk;
 	protected static boolean _debug = true;
-	protected static int timeOut = 16000;
+	protected static int timeOut = 8000;
 
 	/**
 	 * @param args
